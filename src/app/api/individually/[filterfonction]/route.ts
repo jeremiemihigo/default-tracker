@@ -2,9 +2,13 @@ import { IVerificationField } from "@/app/interface/TClient";
 import { lien_dt } from "@/app/static/lien";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(request: NextRequest) {
+export async function POST(
+  request: NextRequest,
+  { params }: { params: { filterfonction: string } }
+) {
   const token = request.cookies.get("access")?.value;
-  const link = `${lien_dt}/dashboardAgent`;
+  const filterfonction = await params.filterfonction;
+  const link = `${lien_dt}/dashboardAgent/${filterfonction}`;
   const data = await request.json();
   const res = await fetch(link, {
     method: "POST",

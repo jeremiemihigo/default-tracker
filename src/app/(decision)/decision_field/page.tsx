@@ -18,7 +18,7 @@ function Decision_field() {
   const submitLogin = async () => {
     setIsLoading(true);
     try {
-      const res = await fetch(`/api/arbitrage/field`, {
+      const res = await fetch(`/api/decision/NRMRG`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

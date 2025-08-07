@@ -18,7 +18,7 @@ function Decision_fraude() {
   const submitLogin = async () => {
     setIsLoading(true);
     try {
-      const res = await fetch(`/api/arbitrage/fraude`, {
+      const res = await fetch(`/api/decision/D7UNY`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",

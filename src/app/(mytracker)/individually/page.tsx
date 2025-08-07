@@ -115,13 +115,17 @@ function Individually() {
   return (
     <HeaderComponent title="Dashboard Individually">
       {load && <Loading type="Loading" />}
-      <Combobox value={codeAgent} data={users} setValue={setCodeAgent} />
-      <div style={{ margin: "10px 0px" }}>
-        <Combobox value={value} data={postes} setValue={setValue} />
+      <div className="flex">
+        <div className="w-sm">
+          <Combobox value={codeAgent} data={users} setValue={setCodeAgent} />
+        </div>
+        <div className="w-sm ml-2 mr-2">
+          <Combobox value={value} data={postes} setValue={setValue} />
+        </div>
+        <Button onClick={() => fetchData()} variant="default">
+          Valider
+        </Button>
       </div>
-      <Button onClick={() => fetchData()} variant="default">
-        Valider
-      </Button>
       {loadData && <Loading type="Loading" />}
       {!loadData && (
         <Tableau_set_Header

@@ -2,9 +2,13 @@
 import { lien_dt } from "@/app/static/lien";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function GET(request: NextRequest) {
+export async function GET(
+  request: NextRequest,
+  { params }: { params: { departement: string } }
+) {
+  const department = await params.departement;
   const token = request.cookies.get("access")?.value;
-  const link = `${lien_dt}/readDecisionArbitrage/NRMRG`;
+  const link = `${lien_dt}/readDecisionArbitrage/${department}`;
   const res = await fetch(link, {
     method: "GET",
     headers: {

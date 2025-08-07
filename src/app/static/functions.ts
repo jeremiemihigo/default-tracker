@@ -1,3 +1,6 @@
+import _ from "lodash";
+import { IFeedback } from "../interface/IFeedbacks";
+
 export function excelSerialToJSDate(serial: number) {
   let days = serial;
   if (serial >= 60) {
@@ -8,3 +11,10 @@ export function excelSerialToJSDate(serial: number) {
   const msPerDay = 24 * 60 * 60 * 1000;
   return new Date(epoch + days * msPerDay).toLocaleDateString();
 }
+export const returnFeedback = (id: string, feedporto: IFeedback[]) => {
+  if (_.filter(feedporto, { idFeedback: id }).length > 0) {
+    return _.filter(feedporto, { idFeedback: id })[0].title;
+  } else {
+    return id;
+  }
+};

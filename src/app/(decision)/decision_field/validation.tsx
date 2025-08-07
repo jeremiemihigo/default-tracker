@@ -31,7 +31,7 @@ function Validation({ client, type }: Props) {
       commentaire,
     };
     try {
-      const res = await fetch("/api/arbitrage", {
+      const res = await fetch("/api/decision_/validateDecision", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

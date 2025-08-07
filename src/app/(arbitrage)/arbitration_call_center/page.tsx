@@ -11,7 +11,7 @@ function Arbitration_call_center() {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const submitLogin = async () => {
     try {
-      const res = await fetch("/api/arbitrage/callcenter", {
+      const res = await fetch("/api/arbitrage/portfolio", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -47,7 +47,6 @@ function Arbitration_call_center() {
     { title: "VM_rs_TL", accessorKey: "last_vm_rs" },
     { title: "Appel", accessorKey: "appel" },
     { title: "current Feedback", accessorKey: "currentFeedbacks" },
-    { title: "Next Feedback", accessorKey: "nextFeedback" },
     { title: "Submitedby", accessorKey: "submitedBy" },
   ];
   return (

@@ -24,8 +24,8 @@ function TableauCustomerTrack({ data }: Props) {
         <Tableau
           data={data}
           keyColonnes={keycolonnes}
-          search_placeholder="account_id"
-          customer_id="account_id"
+          search_placeholder="customer_id"
+          customer_id="customer_id"
         />
       )}
     </div>

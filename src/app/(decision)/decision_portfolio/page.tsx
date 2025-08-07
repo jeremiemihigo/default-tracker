@@ -18,7 +18,7 @@ function Decision_portfolio() {
   const submitLogin = async () => {
     setIsLoading(true);
     try {
-      const res = await fetch(`/api/arbitrage/portfolio`, {
+      const res = await fetch(`/api/decision/portfolio`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
