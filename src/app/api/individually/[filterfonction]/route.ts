@@ -4,10 +4,10 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(
   request: NextRequest,
-  { params }: { params: { filterfonction: string } }
+  context: { params: Promise<{ filterfonction: string }> }
 ) {
   const token = request.cookies.get("access")?.value;
-  const filterfonction = await params.filterfonction;
+  const { filterfonction } = await context.params;
   const link = `${lien_dt}/dashboardAgent/${filterfonction}`;
   const data = await request.json();
   const res = await fetch(link, {

@@ -5,4 +5,5 @@ export interface IUser {
   poste: IPoste[];
   valueFilter: string[];
   codeAgent: string;
+  filename?: string;
 }

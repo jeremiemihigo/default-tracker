@@ -53,6 +53,7 @@ export function NavUser() {
 
   const [user, setUser] = React.useState<IUser | null>(null);
   const loadingUser = async () => {
+    console.log("chargement");
     try {
       const reponse = await fetch("/api/login", {
         method: "GET",
@@ -61,6 +62,7 @@ export function NavUser() {
         },
       });
       const response = await reponse.json();
+      console.log(response);
       if (response.status === 200) {
         setUser(response.data);
       }
@@ -90,7 +92,10 @@ export function NavUser() {
                   className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
                 >
                   <Avatar className="h-8 w-8 rounded-lg">
-                    <AvatarImage src="/bboxx.png" alt="Bboxx" />
+                    <AvatarImage
+                      src={user.filename ? user.filename : "/bboxx.png"}
+                      alt="Bboxx"
+                    />
                     <AvatarFallback className="rounded-lg">CN</AvatarFallback>
                   </Avatar>
                   <div className="grid flex-1 text-left text-sm leading-tight">
@@ -111,7 +116,10 @@ export function NavUser() {
                 <DropdownMenuLabel className="p-0 font-normal">
                   <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                     <Avatar className="h-8 w-8 rounded-lg">
-                      <AvatarImage src="/bboxx.png" alt="Bboxx" />
+                      <AvatarImage
+                        src={user.filename ? user.filename : "/bboxx.png"}
+                        alt="Bboxx"
+                      />
                       <AvatarFallback className="rounded-lg">B</AvatarFallback>
                     </Avatar>
                     <div className="grid flex-1 text-left text-sm leading-tight">

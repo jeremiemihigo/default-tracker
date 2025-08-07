@@ -2,28 +2,20 @@ import { lien_dt } from "@/app/static/lien";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
-  request: NextRequest,
-  { params }: { params: { id: string } }
+  req: NextRequest,
+  context: { params: Promise<{ id: string }> }
 ) {
-  const token = request.cookies.get("access")?.value;
-  const id = params.id;
+  const token = req.cookies.get("access")?.value;
+  const { id } = await context.params;
 
-  const link = `${lien_dt}/readDecisionArbitrage/${id}`;
-  const res = await fetch(link, {
+  const res = await fetch(`${lien_dt}/readDecisionArbitrage/${id}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
-      Authorization: "Bearer " + token,
+      Authorization: `Bearer ${token}`,
     },
   });
 
-  if (res.status === 200) {
-    const data = await res.json();
-    return NextResponse.json({ data, status: res.status });
-  }
-
-  return NextResponse.json(
-    { error: "Failed to fetch", status: res.status },
-    { status: res.status }
-  );
+  const data = await res.json();
+  return NextResponse.json({ data, status: res.status });
 }
