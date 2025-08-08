@@ -7,7 +7,6 @@ import { lien_dt } from "@/app/static/lien";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
-  console.log("je suis ici");
   const token = request.cookies.get("access")?.value;
   const link = `${lien_dt}/arbitrage`;
   const res = await fetch(link, {
@@ -23,7 +22,6 @@ export async function GET(request: NextRequest) {
     const allfeedback: IFeedback[] = data.feedbacks;
 
     const returnvisite = (visites: IVisite[], type: string[]) => {
-      //console.log(visites, type);
       if (
         visites.filter((x) => type.includes(x.demandeur.fonction)).length > 0
       ) {

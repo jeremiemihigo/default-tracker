@@ -50,11 +50,11 @@ function HistoricalStatus() {
 
   return (
     <HeaderComponent title="Historical status">
-      <div className="w-sm">
+      <div className="max-w-sm p-3">
         <Input
           id="customer_id"
           name="customer_id"
-          placeholder="Search by Customer ID"
+          placeholder="Search by customer ID"
           onKeyUp={(e: React.KeyboardEvent<HTMLInputElement>) => {
             if (e.key === "Enter") {
               loading((e.target as HTMLInputElement).value);

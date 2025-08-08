@@ -32,7 +32,6 @@ export async function POST(request: NextRequest) {
 export async function GET(request: NextRequest) {
   const token = request.cookies.get("access")?.value;
   const data = await request.json();
-  console.log(data);
   const link = `${lien_dt}/verification`;
   const res = await fetch(link, {
     method: "POST",
