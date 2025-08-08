@@ -27,6 +27,10 @@ export interface ShopRegion {
   decision: number;
   region: string;
 }
+export interface ITableauPar {
+  label: string;
+  data: number[];
+}
 export interface IDonner {
   validationFraude: number;
   validationField: number;
@@ -37,6 +41,7 @@ export interface IDonner {
   refresh: number;
   act_decisions: ShopRegion[];
   regions: string[];
+  tableau_pars: ITableauPar[];
 }
 export interface ISidebar {
   decision_field: number;

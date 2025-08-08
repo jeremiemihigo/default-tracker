@@ -5,6 +5,7 @@ import { IDonner } from "@/app/interface/IOther";
 import Loading from "@/app/Tools/loading";
 import _ from "lodash";
 import React from "react";
+import LineChart from "./Dashboard";
 
 function MainPage() {
   const [data, setData] = React.useState<IDonner>();
@@ -157,6 +158,9 @@ function MainPage() {
               <p className="text-4xl font-bold">{data?.refresh}</p>
             </div>
           </div>
+          {data && data.tableau_pars.length > 0 && (
+            <LineChart donner={data?.tableau_pars} />
+          )}
         </div>
       )}
     </HeaderComponent>

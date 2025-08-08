@@ -115,7 +115,7 @@ function Individually() {
   return (
     <HeaderComponent title="Dashboard Individually">
       {load && <Loading type="Loading" />}
-      <div className="flex">
+      <div className="flex p-1 w-full">
         <div className="w-sm">
           <Combobox value={codeAgent} data={users} setValue={setCodeAgent} />
         </div>
