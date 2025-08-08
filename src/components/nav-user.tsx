@@ -53,7 +53,6 @@ export function NavUser() {
 
   const [user, setUser] = React.useState<IUser | null>(null);
   const loadingUser = async () => {
-    console.log("chargement");
     try {
       const reponse = await fetch("/api/login", {
         method: "GET",
@@ -62,7 +61,6 @@ export function NavUser() {
         },
       });
       const response = await reponse.json();
-      console.log(response);
       if (response.status === 200) {
         setUser(response.data);
       }
@@ -81,106 +79,106 @@ export function NavUser() {
   }, []);
 
   return (
-    <>
-      {user && (
-        <SidebarMenu>
-          <SidebarMenuItem>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <SidebarMenuButton
-                  size="lg"
-                  className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-                >
-                  <Avatar className="h-8 w-8 rounded-lg">
-                    <AvatarImage
-                      src={user.filename ? user.filename : "/bboxx.png"}
-                      alt="Bboxx"
-                    />
-                    <AvatarFallback className="rounded-lg">CN</AvatarFallback>
-                  </Avatar>
-                  <div className="grid flex-1 text-left text-sm leading-tight">
-                    <span className="truncate font-medium">Bboxx-DRC</span>
+    <SidebarMenu>
+      <SidebarMenuItem>
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+            <SidebarMenuButton
+              size="lg"
+              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
+            >
+              <Avatar className="h-8 w-8 rounded-lg">
+                <AvatarImage
+                  src={user && user.filename ? user.filename : "/bboxx.png"}
+                  alt="Bboxx"
+                />
+                <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+              </Avatar>
+              <div className="grid flex-1 text-left text-sm leading-tight">
+                <span className="truncate font-medium">Bboxx-DRC</span>
+                {user && (
+                  <span className="truncate text-xs">
+                    {user?.poste[0].title}
+                  </span>
+                )}
+              </div>
+              <ChevronsUpDown className="ml-auto size-4" />
+            </SidebarMenuButton>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent
+            className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
+            side={isMobile ? "bottom" : "right"}
+            align="end"
+            sideOffset={4}
+          >
+            <DropdownMenuLabel className="p-0 font-normal">
+              <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
+                <Avatar className="h-8 w-8 rounded-lg">
+                  <AvatarImage
+                    src={user && user.filename ? user.filename : "/bboxx.png"}
+                    alt="Bboxx"
+                  />
+                  <AvatarFallback className="rounded-lg">B</AvatarFallback>
+                </Avatar>
+                <div className="grid flex-1 text-left text-sm leading-tight">
+                  <span className="truncate font-medium">Bboxx-DRC</span>
+                  {user && (
                     <span className="truncate text-xs">
                       {user?.poste[0].title}
                     </span>
-                  </div>
-                  <ChevronsUpDown className="ml-auto size-4" />
-                </SidebarMenuButton>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent
-                className="w-(--radix-dropdown-menu-trigger-width) min-w-56 rounded-lg"
-                side={isMobile ? "bottom" : "right"}
-                align="end"
-                sideOffset={4}
-              >
-                <DropdownMenuLabel className="p-0 font-normal">
-                  <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                    <Avatar className="h-8 w-8 rounded-lg">
-                      <AvatarImage
-                        src={user.filename ? user.filename : "/bboxx.png"}
-                        alt="Bboxx"
-                      />
-                      <AvatarFallback className="rounded-lg">B</AvatarFallback>
-                    </Avatar>
-                    <div className="grid flex-1 text-left text-sm leading-tight">
-                      <span className="truncate font-medium">Bboxx-DRC</span>
-                      <span className="truncate text-xs">
-                        {user?.poste[0].title}
-                      </span>
-                    </div>
-                  </div>
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
+                  )}
+                </div>
+              </div>
+            </DropdownMenuLabel>
+            <DropdownMenuSeparator />
 
-                <DropdownMenuGroup>
-                  <DropdownMenuItem>
-                    <User2Icon />
-                    Agents
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <UserCheckIcon />
-                    Agents admin
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <CreditCard />
-                    Regions and shops
-                  </DropdownMenuItem>
+            <DropdownMenuGroup>
+              <DropdownMenuItem>
+                <User2Icon />
+                Agents
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <UserCheckIcon />
+                Agents admin
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <CreditCard />
+                Regions and shops
+              </DropdownMenuItem>
 
-                  <DropdownMenuItem>
-                    <Bell />
-                    Manage feedbacks
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <RollerCoasterIcon />
-                    Role and department
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <PercentDiamond />
-                    Permissions
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <LucideTableColumnsSplit />
-                    Complaints
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <MessageCircle />
-                    Communications
-                  </DropdownMenuItem>
-                  <DropdownMenuItem>
-                    <Settings />
-                    Parameter portfolio
-                  </DropdownMenuItem>
-                </DropdownMenuGroup>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => Deconnexion()}>
-                  <LogOut />
-                  Log out
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </SidebarMenuItem>
-        </SidebarMenu>
-      )}
-    </>
+              <DropdownMenuItem>
+                <Bell />
+                Manage feedbacks
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <RollerCoasterIcon />
+                Role and department
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <PercentDiamond />
+                Permissions
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <LucideTableColumnsSplit />
+                Complaints
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <MessageCircle />
+                Communications
+              </DropdownMenuItem>
+              <DropdownMenuItem>
+                <Settings />
+                Parameter portfolio
+              </DropdownMenuItem>
+            </DropdownMenuGroup>
+            <DropdownMenuSeparator />
+            <DropdownMenuItem onClick={() => Deconnexion()}>
+              <LogOut />
+              Log out
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      </SidebarMenuItem>
+    </SidebarMenu>
   );
 }

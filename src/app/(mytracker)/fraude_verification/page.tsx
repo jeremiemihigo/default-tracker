@@ -152,7 +152,10 @@ function Fraude_verification() {
         <Loading type="Loading" />
       ) : (
         <>
-          <Combobox value={value} data={postes} setValue={setValue} />
+          <div className="w-sm">
+            <Combobox value={value} data={postes} setValue={setValue} />
+          </div>
+
           <Tableau_set_Header
             data={data}
             columns={[...columns, ...columns1]}

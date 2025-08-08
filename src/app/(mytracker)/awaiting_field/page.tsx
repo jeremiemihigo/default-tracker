@@ -127,10 +127,16 @@ function Awaiting_Field() {
         <Loading type="Loading" />
       ) : (
         <>
-          <Combobox value={value} data={postes} setValue={setValue} />
-          <Button variant="default" onClick={() => submitLogin()}>
-            Search
-          </Button>
+          <div className="flex gap-2">
+            <div className="w-sm">
+              <Combobox value={value} data={postes} setValue={setValue} />
+            </div>
+            <div>
+              <Button variant="default" onClick={() => submitLogin()}>
+                Search
+              </Button>
+            </div>
+          </div>
           <Tableau_set_Header
             data={data}
             columns={[...columns, ...columns1]}

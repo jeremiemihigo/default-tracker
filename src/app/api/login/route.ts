@@ -60,6 +60,8 @@ export async function GET(request: NextRequest) {
     });
 
     const reponse = await res.json();
+    console.log(reponse);
+    console.log(res.status);
     const response = NextResponse.json({
       data: reponse,
       status: res.status,

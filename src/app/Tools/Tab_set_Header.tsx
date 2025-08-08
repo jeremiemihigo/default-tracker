@@ -89,7 +89,7 @@ export default function Tableau_set_Header<TData extends object>({
           onChange={(event) =>
             table.getColumn(customer_id)?.setFilterValue(event.target.value)
           }
-          className="max-w-sm"
+          className="max-w-sm mr-2"
         />
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
