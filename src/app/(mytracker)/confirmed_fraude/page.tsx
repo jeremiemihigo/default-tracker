@@ -52,7 +52,7 @@ function Confirmed_fraude() {
     { title: "createdAt", accessorKey: "createdAt" },
     { title: "Submitedby", accessorKey: "submitedBy" },
     { title: "type Decision", accessorKey: "typeDecision" },
-    { title: "statut Decision", accessorKey: "statutDecision" },
+    // { title: "statut Decision", accessorKey: "statutDecision" },
   ];
   const columns: ColumnDef<ICasValider>[] = [
     {
@@ -95,6 +95,27 @@ function Confirmed_fraude() {
       cell: ({ row }) => <div>{row.getValue(cle.accessorKey)}</div>,
     };
   });
+  const columns2: ColumnDef<ICasValider>[] = [
+    {
+      accessorKey: "statutDecision",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            statut Decision
+            <ArrowUpDown />
+          </Button>
+        );
+      },
+      cell: ({ row }) => (
+        <div className={row.original.statutDecision.toLocaleLowerCase().trim()}>
+          {row.getValue("statutDecision")}
+        </div>
+      ),
+    },
+  ];
   return (
     <HeaderComponent title="Confirmed by fraud managment">
       {isLoading ? (
@@ -102,7 +123,7 @@ function Confirmed_fraude() {
       ) : (
         <Tableau_set_Header
           data={data}
-          columns={[...columns, ...columns1]}
+          columns={[...columns, ...columns1, ...columns2]}
           customer_id="customer_id"
           search_placeholder="Filter by customer ID"
         />

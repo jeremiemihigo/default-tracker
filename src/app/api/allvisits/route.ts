@@ -15,8 +15,15 @@ export async function GET(request: NextRequest) {
   });
   if (res.status === 200) {
     const data: IVisitsField[] = await res.json();
+    const donner = data.map((x) => {
+      return {
+        ...x,
+        feedbackvm: x.feedback.length > 0 ? x.feedback[0].title : x.raison,
+      };
+    });
+
     const response = NextResponse.json({
-      data,
+      data: donner,
       status: res.status,
     });
     return response;

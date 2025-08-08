@@ -1,6 +1,7 @@
 "use client";
 import HeaderComponent from "@/app/header/Header";
 import { IHistoricalStatus } from "@/app/interface/TClient";
+import Excel from "@/app/Tools/Excel";
 import Loading from "@/app/Tools/loading";
 import Tableau from "@/app/Tools/Tableau";
 import { Input } from "@/components/ui/input";
@@ -63,12 +64,15 @@ function HistoricalStatus() {
         />
       </div>
       {!load && data && data.length > 0 && (
-        <Tableau
-          data={data}
-          keyColonnes={keyColonnes}
-          customer_id="month"
-          search_placeholder="Filter by Month"
-        />
+        <>
+          <Excel data={data} filename="Historical status" />
+          <Tableau
+            data={data}
+            keyColonnes={keyColonnes}
+            customer_id="month"
+            search_placeholder="Filter by Month"
+          />
+        </>
       )}
       {load && <Loading type="Loading" />}
     </HeaderComponent>

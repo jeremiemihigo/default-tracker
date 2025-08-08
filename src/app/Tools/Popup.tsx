@@ -26,7 +26,7 @@ export default function Popup({
     <Dialog>
       <form>
         <DialogTrigger asChild>
-          <Button variant="outline">{btnname}</Button>
+          <Button variant="default">{btnname}</Button>
         </DialogTrigger>
         <DialogContent className="sm:max-w-[425px]">
           <DialogHeader>

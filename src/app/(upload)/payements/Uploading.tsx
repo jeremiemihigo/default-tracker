@@ -1,5 +1,6 @@
 import { IPayement } from "@/app/interface/IOther";
 import { excelSerialToJSDate } from "@/app/static/functions";
+import Excel from "@/app/Tools/Excel";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import React from "react";
@@ -84,25 +85,18 @@ function UploadingPayment() {
     }
   };
 
-  const template = () => {
-    const donner = [
-      {
-        account_id: "",
-        shop_name: "",
-        transaction_time: "",
-        amount: "",
-        processed_date: "",
-        payment_status: "",
-        provider_transact_reference: "",
-        provider: "",
-      },
-    ];
-    const fileName = "Template_Payment";
-    const worksheet = xlsx.utils.json_to_sheet(donner);
-    const workbook = xlsx.utils.book_new();
-    xlsx.utils.book_append_sheet(workbook, worksheet, "Template");
-    xlsx.writeFile(workbook, `${fileName}.xlsx`);
-  };
+  const template = [
+    {
+      account_id: "",
+      shop_name: "",
+      transaction_time: "",
+      amount: "",
+      processed_date: "",
+      payment_status: "",
+      provider_transact_reference: "",
+      provider: "",
+    },
+  ];
   const sendData = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setSending(true);
@@ -143,7 +137,11 @@ function UploadingPayment() {
           Submit
         </Button>
       )}
-      <Button onClick={() => template()}>Download template</Button>
+      <Excel
+        data={template}
+        filename="Template payment"
+        title="Download template"
+      />
     </div>
   );
 }

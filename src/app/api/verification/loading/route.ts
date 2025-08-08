@@ -1,5 +1,7 @@
 // import { lien_dt } from "@/app/static/lien";
+import { IFeedback } from "@/app/interface/IFeedbacks";
 import { IVerificationField } from "@/app/interface/TClient";
+import { returnFeedback } from "@/app/static/functions";
 import { lien_dt } from "@/app/static/lien";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -16,7 +18,11 @@ export async function POST(request: NextRequest) {
     body: JSON.stringify(data),
   });
   if (res.status === 200) {
-    const data: IVerificationField[] = await res.json();
+    const dataserver = await res.json();
+
+    const data: IVerificationField[] = dataserver.data;
+    const allfeedbacks: IFeedback[] = dataserver.allfeedbacks;
+
     const returnIncharge = (x: IVerificationField) => {
       if (x.departement.length > 0) {
         return x.departement.map(function (x) {
@@ -40,9 +46,15 @@ export async function POST(request: NextRequest) {
         par: x.par,
         submitedBy: x.submitedBy,
         //Ancienne visite par fonction
-        feedback_last_vm: x.vm_fonction ? x.vm_fonction.demande.raison : "",
-        date_last_vm: x.vm_fonction ? x.vm_fonction.demande.updatedAt : "",
-        agent_last_vm: x.vm_fonction ? x.vm_fonction.demandeur.nom : "",
+        feedback_last_vm: x.vm_fonction
+          ? returnFeedback(x.vm_fonction.demande.raison, allfeedbacks)
+          : "No_visits",
+        date_last_vm: x.vm_fonction
+          ? x.vm_fonction.demande.updatedAt
+          : "No_visits",
+        agent_last_vm: x.vm_fonction
+          ? x.vm_fonction.demandeur.nom
+          : "No_visits",
         //visite categorisation
         last_vm_categorie_date: x.visite_categori
           ? x.visite_categori.demande.updatedAt
@@ -53,7 +65,9 @@ export async function POST(request: NextRequest) {
         last_vm_for_categorie_id: x.visite_categori
           ? x.visite_categori.demandeur.codeAgent
           : "",
-        feedback_call: x.last_call ? x.last_call.sioui_texte : "",
+        feedback_call: x.last_call
+          ? returnFeedback(x.last_call.sioui_texte, allfeedbacks)
+          : "",
         currentFeedback: x.currentFeedback,
         submitedby: x.submitedBy,
         incharge: returnIncharge(x),

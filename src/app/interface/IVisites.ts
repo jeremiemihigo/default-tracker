@@ -1,3 +1,5 @@
+import { IFeedback } from "./IFeedbacks";
+
 export interface IVisite {
   codeclient: string;
   clientStatut: string;
@@ -30,4 +32,5 @@ export interface IVisitsField {
   dateSave: string;
   raison: string;
   indt: IVisite[];
+  feedback: IFeedback[];
 }

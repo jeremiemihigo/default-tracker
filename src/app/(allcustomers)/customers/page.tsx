@@ -1,6 +1,7 @@
 "use client";
 import HeaderComponent from "@/app/header/Header";
 import { ITclient } from "@/app/interface/TClient";
+import Excel from "@/app/Tools/Excel";
 import Loading from "@/app/Tools/loading";
 import Tableau_set_Header from "@/app/Tools/Tab_set_Header";
 import { Button } from "@/components/ui/button";
@@ -89,12 +90,15 @@ function Customers() {
       {isLoading ? (
         <Loading type="Loading" />
       ) : (
-        <Tableau_set_Header
-          data={data}
-          columns={columns1}
-          customer_id="customer_id"
-          search_placeholder="Filter by customer ID"
-        />
+        <>
+          <Excel data={data} filename="All customer to track" />
+          <Tableau_set_Header
+            data={data}
+            columns={columns1}
+            customer_id="customer_id"
+            search_placeholder="Filter by customer ID"
+          />
+        </>
       )}
     </HeaderComponent>
   );

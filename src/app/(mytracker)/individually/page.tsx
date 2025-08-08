@@ -5,6 +5,7 @@ import { IUser } from "@/app/interface/IUser";
 import { IVerificationField_Front } from "@/app/interface/TClient";
 import { postes } from "@/app/static/lien";
 import { Combobox } from "@/app/Tools/combobox";
+import Excel from "@/app/Tools/Excel";
 import Loading from "@/app/Tools/loading";
 import Tableau_set_Header from "@/app/Tools/Tab_set_Header";
 import { Button } from "@/components/ui/button";
@@ -125,15 +126,22 @@ function Individually() {
         <Button onClick={() => fetchData()} variant="default">
           Valider
         </Button>
+        {data && data.length > 0 && (
+          <div className="ml-1">
+            <Excel data={data} filename={`customer to track by ${codeAgent}`} />
+          </div>
+        )}
       </div>
       {loadData && <Loading type="Loading" />}
       {!loadData && (
-        <Tableau_set_Header
-          data={data}
-          columns={columns1}
-          customer_id="customer_id"
-          search_placeholder="Filter by customer ID"
-        />
+        <>
+          <Tableau_set_Header
+            data={data}
+            columns={columns1}
+            customer_id="customer_id"
+            search_placeholder="Filter by customer ID"
+          />
+        </>
       )}
     </HeaderComponent>
   );

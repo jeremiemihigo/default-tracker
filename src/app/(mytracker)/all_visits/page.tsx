@@ -1,6 +1,7 @@
 "use client";
 import HeaderComponent from "@/app/header/Header";
 import { IVisitsField } from "@/app/interface/IVisites";
+import Excel from "@/app/Tools/Excel";
 import Loading from "@/app/Tools/loading";
 import Tableau_set_Header from "@/app/Tools/Tab_set_Header";
 import { Button } from "@/components/ui/button";
@@ -50,7 +51,7 @@ function All_visites() {
     { title: "clientStatut", accessorKey: "clientStatut" },
     { title: "consExpDays", accessorKey: "consExpDays" },
     { title: "dateSave", accessorKey: "dateSave" },
-    { title: "raison", accessorKey: "raison" },
+    { title: "raison", accessorKey: "feedbackvm" },
     // { title: "indt", accessorKey: "indt", },
   ];
   const columns: ColumnDef<IVisitsField>[] = keyColonnes.map((cle) => {
@@ -75,12 +76,15 @@ function All_visites() {
       {isLoading ? (
         <Loading type="Loading" />
       ) : (
-        <Tableau_set_Header
-          data={data}
-          columns={columns}
-          customer_id="customer_id"
-          search_placeholder="Filter by customer ID"
-        />
+        <>
+          <Excel data={data} filename="All visits staff" />
+          <Tableau_set_Header
+            data={data}
+            columns={columns}
+            customer_id="customer_id"
+            search_placeholder="Filter by customer ID"
+          />
+        </>
       )}
     </HeaderComponent>
   );

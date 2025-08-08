@@ -1,4 +1,5 @@
 import { IUploadClient } from "@/app/interface/IOther";
+import Excel from "@/app/Tools/Excel";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import React from "react";
@@ -67,24 +68,17 @@ function UploadingCustomer() {
     }
   };
 
-  const template = () => {
-    const donner = [
-      {
-        customer_id: "",
-        customer_name: "",
-        shop: "",
-        region: "",
-        sat: "",
-        par: "",
-        cashattendu: "",
-      },
-    ];
-    const fileName = "Template_customer_to_track";
-    const worksheet = xlsx.utils.json_to_sheet(donner);
-    const workbook = xlsx.utils.book_new();
-    xlsx.utils.book_append_sheet(workbook, worksheet, "Template");
-    xlsx.writeFile(workbook, `${fileName}.xlsx`);
-  };
+  const template = [
+    {
+      customer_id: "",
+      customer_name: "",
+      shop: "",
+      region: "",
+      sat: "",
+      par: "",
+      cashattendu: "",
+    },
+  ];
   const sendData = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setSending(true);
@@ -126,7 +120,11 @@ function UploadingCustomer() {
             Submit
           </Button>
         )}
-        <Button onClick={() => template()}>Download template</Button>
+        <Excel
+          data={template}
+          filename="Template customer to track"
+          title="Download template"
+        />
       </div>
       {data.length > 0 && (
         <div>

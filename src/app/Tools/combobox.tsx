@@ -17,7 +17,8 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { cn } from "@/lib/utils";
-import React from "react";
+
+import * as React from "react";
 import { ICombo } from "../interface/IOther";
 
 type Props = {
@@ -45,16 +46,16 @@ export function Combobox({ value, data, setValue }: Props) {
       </PopoverTrigger>
       <PopoverContent className="w-full p-0">
         <Command>
-          <CommandInput placeholder="Search..." className="h-9" />
+          <CommandInput placeholder="Search one..." className="h-9" />
           <CommandList>
-            <CommandEmpty>No data found.</CommandEmpty>
+            <CommandEmpty>No framework found.</CommandEmpty>
             <CommandGroup>
               {data.map((framework) => (
                 <CommandItem
                   key={framework.value}
-                  value={framework.value}
-                  onSelect={(currentValue) => {
-                    setValue(currentValue === value ? "" : currentValue);
+                  value={framework.label}
+                  onSelect={() => {
+                    setValue(framework.value);
                     setOpen(false);
                   }}
                 >

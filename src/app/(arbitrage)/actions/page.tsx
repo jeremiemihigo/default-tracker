@@ -1,6 +1,7 @@
 "use client";
 import HeaderComponent from "@/app/header/Header";
 import { IAction } from "@/app/interface/IAction";
+import Excel from "@/app/Tools/Excel";
 import Loading from "@/app/Tools/loading";
 import Popup from "@/app/Tools/Popup";
 import Tableau_set_Header from "@/app/Tools/Tab_set_Header";
@@ -107,12 +108,15 @@ function Actions() {
       {load ? (
         <Loading type="Loading" />
       ) : (
-        <Tableau_set_Header
-          data={actions}
-          columns={[...columns, ...columns1]}
-          customer_id="customer_id"
-          search_placeholder="Filter by customer ID"
-        />
+        <>
+          <Excel data={actions} filename="Actions" />
+          <Tableau_set_Header
+            data={actions}
+            columns={[...columns, ...columns1]}
+            customer_id="customer_id"
+            search_placeholder="Filter by customer ID"
+          />
+        </>
       )}
     </HeaderComponent>
   );
