@@ -5,7 +5,7 @@ type Props = {
 };
 function Loading({ type }: Props) {
   return (
-    <>
+    <div className="mt-3">
       {type === "Loading" && <div className="w-screen spinner "></div>}
       {type === "page" && (
         <div className="firstloading">
@@ -17,7 +17,7 @@ function Loading({ type }: Props) {
           />
         </div>
       )}
-    </>
+    </div>
   );
 }
 

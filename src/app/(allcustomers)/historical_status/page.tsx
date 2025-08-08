@@ -50,7 +50,7 @@ function HistoricalStatus() {
 
   return (
     <HeaderComponent title="Historical status">
-      <div className="grid gap-3 w-sm">
+      <div className="w-sm">
         <Input
           id="customer_id"
           name="customer_id"
