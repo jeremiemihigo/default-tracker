@@ -18,7 +18,7 @@ function Excel<TData extends object>({ data, title, filename }: Props<TData>) {
   return (
     <Button onClick={() => template()}>
       <File />
-      {title ? title : "Export"}
+      <span>{title ? title : "Export"}</span>
     </Button>
   );
 }

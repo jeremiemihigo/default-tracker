@@ -31,7 +31,7 @@ function ChangeDecision({ data }: Props) {
       region: data.region,
       decision,
     };
-    const response = await fetch("/api/decision", {
+    const response = await fetch("/api/decision_/change_decision", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -39,6 +39,7 @@ function ChangeDecision({ data }: Props) {
       body: JSON.stringify(donner),
     });
     const payload = await response.json().catch(() => null);
+    console.log(payload);
     if (payload.status === 200) {
       toast("Opération effectuée");
       setIsSending(false);
