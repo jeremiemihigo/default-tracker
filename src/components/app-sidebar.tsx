@@ -3,6 +3,7 @@
 import {
   Database,
   DecimalsArrowLeftIcon,
+  HistoryIcon,
   LayoutDashboard,
   Target,
   Upload,
@@ -133,7 +134,7 @@ const data = {
     {
       name: "Historical status",
       url: "/historical_status",
-      icon: LayoutDashboard,
+      icon: HistoryIcon,
     },
   ],
 };
