@@ -38,7 +38,7 @@ function Arbitration_call_center() {
   }, []);
   const keyColonnes = [
     { title: "Customer ID", accessorKey: "customer_id" },
-    { title: "Customer name", accessorKey: "customer_name" },
+    { title: "Customer name", accessorKey: "custimer_name" },
     { title: "Shop name", accessorKey: "shop" },
     { title: "Region name", accessorKey: "region" },
     { title: "Par", accessorKey: "par" },

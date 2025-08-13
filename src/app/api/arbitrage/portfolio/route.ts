@@ -2,7 +2,7 @@
 import { IFeedback } from "@/app/interface/IFeedbacks";
 import { IVisite } from "@/app/interface/IVisites";
 import { IArbitration } from "@/app/interface/TClient";
-import { returnFeedback } from "@/app/static/functions";
+import { capitalize, returnFeedback } from "@/app/static/functions";
 import { lien_dt } from "@/app/static/lien";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -35,20 +35,28 @@ export async function GET(request: NextRequest) {
     const donner = arbitrage.map((x) => {
       return {
         ...x,
-        appel: x.last_call?.sioui_texte
-          ? returnFeedback(x.last_call?.sioui_texte, allfeedback)
-          : "",
-        currentFeedbacks: returnFeedback(x.currentFeedback, allfeedback),
-        last_vm_agent:
+        custimer_name: capitalize(x.customer_name),
+        appel: capitalize(
+          x.last_call?.sioui_texte
+            ? returnFeedback(x.last_call?.sioui_texte, allfeedback)
+            : ""
+        ),
+        currentFeedbacks: capitalize(
+          returnFeedback(x.currentFeedback, allfeedback)
+        ),
+        last_vm_agent: capitalize(
           x?.visites.length > 0
             ? returnvisite(x.visites, ["agent", "tech"])
-            : "No_visits",
-        last_vm_rs:
+            : "No_visits"
+        ),
+        last_vm_rs: capitalize(
           x?.visites.length > 0
             ? returnvisite(x.visites, ["RS", "TL"])
-            : "No_visits",
-        last_vm_po:
-          x?.visites.length > 0 ? returnvisite(x.visites, ["PO"]) : "No_visits",
+            : "No_visits"
+        ),
+        last_vm_po: capitalize(
+          x?.visites.length > 0 ? returnvisite(x.visites, ["PO"]) : "No_visits"
+        ),
       };
     });
 
