@@ -18,3 +18,10 @@ export const returnFeedback = (id: string, feedporto: IFeedback[]) => {
     return id;
   }
 };
+export function capitalize(str: string) {
+  if (str) {
+    return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
+  } else {
+    return str;
+  }
+}

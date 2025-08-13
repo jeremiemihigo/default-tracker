@@ -53,7 +53,7 @@ function Awaiting_Field() {
     { title: "Shop name", accessorKey: "shop" },
     { title: "Region name", accessorKey: "region" },
     { title: "Par", accessorKey: "par" },
-    { title: "Feedback_last_vm", accessorKey: "feedback_last_vm" },
+    { title: "Feedback_last_vm", accessorKey: "Feedback_last_vm" },
     { title: "Date_last_vm", accessorKey: "date_last_vm" },
     { title: "Agent_last_vm", accessorKey: "agent_last_vm" },
     {
@@ -68,8 +68,8 @@ function Awaiting_Field() {
     { title: "Current status", accessorKey: "currentFeedback" },
     // { title: "Action", accessorKey: "action" },
     // { title: "Decision", accessorKey: "statut_decision" },
-    { title: "incharge", accessorKey: "incharge" },
-    { title: "Submitedby", accessorKey: "submitedby" },
+    { title: "In_charge", accessorKey: "In_charge" },
+    { title: "Submited_By", accessorKey: "Submited_By" },
   ];
   const columns: ColumnDef<IVerificationField_Front>[] = [
     {

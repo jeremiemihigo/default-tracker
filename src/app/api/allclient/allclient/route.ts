@@ -2,6 +2,7 @@
 import { IFeedback } from "@/app/interface/IFeedbacks";
 import { IVisite } from "@/app/interface/IVisites";
 import { ITclient } from "@/app/interface/TClient";
+import { capitalize } from "@/app/static/functions";
 import { lien_dt } from "@/app/static/lien";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -62,33 +63,36 @@ export async function GET(request: NextRequest) {
         actif: x.actif,
         idFeedback: x.currentFeedback,
         customer_id: x.codeclient,
-        customer_name: x.nomclient,
-        nom: x.nomclient,
+        customer_name: capitalize(x.nomclient),
         par: x.par,
         region: x.region,
         shop: x.shop,
-        action: x.action,
-        submitedBy: x.submitedBy,
-        inprocess: x.actif ? "In_Process" : "Done",
-        currentFeedback: x.tfeedback?.title,
-        cashattendu: x.cashattendu ? "$" + x.cashattendu : "undefined",
-        cashPayer: x.cashPayer ? "$" + x.cashPayer : "undefined",
-        feedback_call:
-          returnFeedback(x.derniereappel?.sioui_texte, "No_calls") ||
-          "No_calls",
-        last_vm_agent:
+        Action: capitalize(x.action),
+        submitedBy: capitalize(x.submitedBy),
+        In_process: x.actif ? "In_Process" : "Done",
+        Current_status: capitalize(x.tfeedback?.title),
+        expected_cash: x.cashattendu ? "$" + x.cashattendu : "$0",
+        cash_Pay: x.cashPayer ? "$" + x.cashPayer : "$0",
+        Feedback_call: capitalize(
+          returnFeedback(x.derniereappel?.sioui_texte, "No_calls") || "No_calls"
+        ),
+        Feedback_PA_or_Tech: capitalize(
           x.visites?.length > 0
             ? returnvisite(x.visites, ["agent", "tech"])
-            : "No_visits",
-        zbm_rs_sm_tl:
+            : "No_visits"
+        ),
+
+        zbm_rs_sm_tl: capitalize(
           x?.visites.length > 0
             ? returnvisite(x.visites, ["RS", "TL", "SM", "ZBM"])
-            : "No_visits",
-        po:
-          x?.visites.length > 0 ? returnvisite(x.visites, ["PO"]) : "No_visits",
+            : "No_visits"
+        ),
+        Feedback_PO: capitalize(
+          x?.visites.length > 0 ? returnvisite(x.visites, ["PO"]) : "No_visits"
+        ),
         fullDate: x.fullDate,
-        statut_decision: x.statut_decision,
-        incharge: returnIncharge(x),
+        Decision: capitalize(x.statut_decision),
+        In_charge: returnIncharge(x),
       };
     });
     const response = NextResponse.json({

@@ -3,18 +3,20 @@ import HeaderComponent from "@/app/header/Header";
 import { ITclient } from "@/app/interface/TClient";
 import Excel from "@/app/Tools/Excel";
 import Loading from "@/app/Tools/loading";
+import Popup from "@/app/Tools/Popup";
 import Tableau_set_Header from "@/app/Tools/Tab_set_Header";
 import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import Individually from "./individually/page";
 
 function Customers() {
   const [data, setData] = useState<ITclient[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const submitLogin = async () => {
     try {
-      const res = await fetch("/api/allclient", {
+      const res = await fetch("/api/allclient/allclient", {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -45,17 +47,17 @@ function Customers() {
     { title: "Shop name", accessorKey: "shop" },
     { title: "Region name", accessorKey: "region" },
     { title: "Par", accessorKey: "par" },
-    { title: "In process", accessorKey: "inprocess" },
-    { title: "feedback_call", accessorKey: "feedback_call" },
-    { title: "Feedback PA", accessorKey: "last_vm_agent" },
+    { title: "In process", accessorKey: "In_process" },
+    { title: "Feedback_call", accessorKey: "Feedback_call" },
+    { title: "Feedback PA or Tech", accessorKey: "Feedback_PA_or_Tech" },
     { title: "ZBM,RS,SM & TL", accessorKey: "zbm_rs_sm_tl" },
-    { title: "PO", accessorKey: "po" },
-    { title: "Current status", accessorKey: "currentFeedback" },
-    { title: "Action", accessorKey: "action" },
-    { title: "Decision", accessorKey: "statut_decision" },
-    { title: "cash attendu", accessorKey: "cashattendu" },
-    { title: "cash Payer", accessorKey: "cashPayer" },
-    { title: "incharge", accessorKey: "incharge" },
+    { title: "Feedback_PO", accessorKey: "Feedback_PO" },
+    { title: "Current status", accessorKey: "Current_status" },
+    { title: "Action", accessorKey: "Action" },
+    { title: "Decision", accessorKey: "Decision" },
+    { title: "Expected cash", accessorKey: "expected_cash" },
+    { title: "Cash Pay", accessorKey: "cash_Pay" },
+    { title: "In charge", accessorKey: "In_charge" },
   ];
 
   const columns1: ColumnDef<ITclient>[] = keyColonnes.map((cle) => {
@@ -75,8 +77,8 @@ function Customers() {
       cell: ({ row }) => (
         <div
           className={
-            cle.accessorKey === "inprocess"
-              ? row.original.inprocess?.toLocaleLowerCase()
+            cle.accessorKey === "In_process"
+              ? "" + row.original["In_process" as keyof ITclient]
               : ""
           }
         >
@@ -91,7 +93,19 @@ function Customers() {
         <Loading type="Loading" />
       ) : (
         <>
-          <Excel data={data} filename="All customer to track" />
+          <div className="flex gap-2">
+            <Excel data={data} filename="All customer to track" />
+            <Popup
+              btnname="Individual search"
+              title="Individual search"
+              description=""
+              component={
+                <Individually
+                  setData={setData as Dispatch<SetStateAction<ITclient[]>>}
+                />
+              }
+            />
+          </div>
           <Tableau_set_Header
             data={data}
             columns={columns1}

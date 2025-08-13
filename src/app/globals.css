@@ -127,7 +127,7 @@
   text-align: center;
 }
 .pending,
-.in_process,
+.In_Process,
 .verification {
   background-color: rgb(196, 198, 91);
   border-radius: 5px;
@@ -135,7 +135,7 @@
 }
 .approved,
 .insla,
-.done {
+.Done {
   background-color: rgb(14, 95, 45);
   border-radius: 5px;
   text-align: center;

@@ -127,7 +127,6 @@ export interface IArbitration {
   last_vm_rs?: string;
   last_vm_po?: string;
 }
-
 export interface IHistoricalStatus {
   nomclient: string;
   codeclient: string;
@@ -148,4 +147,15 @@ export interface IHistoricalStatus {
   poste: string;
   sla: "IN SLA" | "OUT SLA";
   createdAt: string;
+}
+export interface IVisitedAgent {
+  customer_id: string;
+  customer_name: string;
+  shop: string;
+  par: string;
+  dateSave: string;
+  feedback: string;
+  Id_who_had_visited: string;
+  agent_who_had_visited: string;
+  Feedback_call: string;
 }

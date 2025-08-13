@@ -19,31 +19,78 @@ import {
   SidebarHeader,
   SidebarRail,
 } from "@/components/ui/sidebar";
+import { NavProjects } from "./nav-projects";
 
 // This is sample data.
 const data = {
-  navMain: [
+  projects: [
     {
-      title: "DASHBOARD",
+      name: "Dashboard",
       url: "/",
       icon: LayoutDashboard,
-      isActive: true,
+    },
+  ],
+  navMain: [
+    {
+      title: "My tracker",
+      url: "#",
+      icon: Target,
       items: [
         {
-          title: "Default tracker",
-          url: "/",
-        },
-        {
-          title: "Customers",
+          title: "All customers to track",
           url: "/customers",
         },
         {
-          title: "Historical status",
-          url: "/historical_status",
+          title: "To be track by field",
+          url: "/awaiting_field",
+        },
+        {
+          title: "To be tracked by PO",
+          url: "/fraude_verification",
+        },
+        {
+          title: "To be tracked by agent",
+          url: "/track_by_agent",
+        },
+        // {
+        //   title: "Individually",
+        //   url: "/individually",
+        // },
+
+        // {
+        //   title: "Conf. field",
+        //   url: "/confirmed_field",
+        // },
+        // {
+        //   title: "Conf fraud",
+        //   url: "/confirmed_fraude",
+        // },
+        {
+          title: "All staffs visits in PAR30+",
+          url: "/all_visits",
+        },
+        {
+          title: "To be tracked by Agent",
+          url: "/to_be_tracked_by_Agent",
         },
       ],
     },
 
+    {
+      title: "Validation",
+      url: "#",
+      icon: Database,
+      items: [
+        {
+          title: "Actions",
+          url: "/actions",
+        },
+        {
+          title: "Arbitration",
+          url: "/arbitration_call_center",
+        },
+      ],
+    },
     {
       title: "Decisions",
       url: "#",
@@ -66,54 +113,6 @@ const data = {
         },
       ],
     },
-
-    {
-      title: "MY TRACKER",
-      url: "#",
-      icon: Target,
-      items: [
-        {
-          title: "Individually",
-          url: "/individually",
-        },
-        {
-          title: "Verif. field",
-          url: "/awaiting_field",
-        },
-        {
-          title: "Verif. fraud",
-          url: "/fraude_verification",
-        },
-        {
-          title: "Conf. field",
-          url: "/confirmed_field",
-        },
-        {
-          title: "Conf fraud",
-          url: "/confirmed_fraude",
-        },
-        {
-          title: "visits",
-          url: "/all_visits",
-        },
-      ],
-    },
-
-    {
-      title: "ARBITRATION",
-      url: "#",
-      icon: Database,
-      items: [
-        {
-          title: "Categorization",
-          url: "/arbitration_call_center",
-        },
-        {
-          title: "Actions",
-          url: "/actions",
-        },
-      ],
-    },
     {
       title: "Upload",
       url: "#",
@@ -130,6 +129,13 @@ const data = {
       ],
     },
   ],
+  status: [
+    {
+      name: "Historical status",
+      url: "/historical_status",
+      icon: LayoutDashboard,
+    },
+  ],
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -139,7 +145,9 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <TeamSwitcher />
       </SidebarHeader>
       <SidebarContent>
+        <NavProjects projects={data.projects} />
         <NavMain items={data.navMain} />
+        <NavProjects projects={data.status} />
       </SidebarContent>
       <SidebarFooter>
         <NavUser />
