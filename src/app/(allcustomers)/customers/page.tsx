@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import Individually from "./individually/page";
+import Individually from "./individually/Individually";
 
 function Customers() {
   const [data, setData] = useState<ITclient[]>([]);

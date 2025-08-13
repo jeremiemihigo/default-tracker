@@ -13,9 +13,7 @@ type Props = {
 };
 function Individually({ setData }: Props) {
   const [users, setUsers] = React.useState<ICombo[]>([]);
-
   const [codeAgent, setCodeAgent] = React.useState<string>("");
-  const [value, setValue] = React.useState<string>("PO");
   const [load, setLoad] = React.useState<boolean>(true);
   const [loadData, setLoadData] = React.useState<boolean>(false);
 
