@@ -74,6 +74,7 @@ export async function POST(request: NextRequest) {
         ),
         currentFeedback: x.currentFeedback,
         In_charge: returnIncharge(x)?.join(";"),
+        Observation: "On track",
       };
     });
     const response = NextResponse.json({

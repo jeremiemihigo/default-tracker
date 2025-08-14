@@ -70,6 +70,7 @@ export interface IVerificationField_Front {
   currentFeedback: string;
   submitedby: string;
   incharge: string;
+  Observation: string;
 }
 export interface IComment {
   commentaire: string;

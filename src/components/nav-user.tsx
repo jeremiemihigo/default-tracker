@@ -5,11 +5,8 @@ import {
   ChevronsUpDown,
   CreditCard,
   LogOut,
-  LucideTableColumnsSplit,
-  MessageCircle,
   PercentDiamond,
   RollerCoasterIcon,
-  Settings,
   User2Icon,
   UserCheckIcon,
 } from "lucide-react";
@@ -31,6 +28,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "@/components/ui/sidebar";
+import Link from "next/link";
 import React from "react";
 import { toast } from "sonner";
 
@@ -77,6 +75,23 @@ export function NavUser() {
     };
     initialize();
   }, []);
+
+  const donner = [
+    { title: "Agents", icon: <User2Icon />, link: "/agents" },
+    { title: "Agents admin", icon: <UserCheckIcon />, link: "/agents_admin" },
+    {
+      title: "Regions and shops",
+      icon: <CreditCard />,
+      link: "/regions_and_shops",
+    },
+    { title: "Manage feedbacks", icon: <Bell />, link: "/manage_feedbacks" },
+    {
+      title: "Role and department",
+      icon: <RollerCoasterIcon />,
+      link: "/role_and_department",
+    },
+    { title: "Permissions", icon: <PercentDiamond />, link: "/permissions" },
+  ];
 
   return (
     <SidebarMenu>
@@ -133,43 +148,16 @@ export function NavUser() {
             <DropdownMenuSeparator />
 
             <DropdownMenuGroup>
-              <DropdownMenuItem>
-                <User2Icon />
-                Agents
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <UserCheckIcon />
-                Agents admin
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <CreditCard />
-                Regions and shops
-              </DropdownMenuItem>
-
-              <DropdownMenuItem>
-                <Bell />
-                Manage feedbacks
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <RollerCoasterIcon />
-                Role and department
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <PercentDiamond />
-                Permissions
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <LucideTableColumnsSplit />
-                Complaints
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <MessageCircle />
-                Communications
-              </DropdownMenuItem>
-              <DropdownMenuItem>
-                <Settings />
-                Parameter portfolio
-              </DropdownMenuItem>
+              {donner.map((item, key) => {
+                return (
+                  <Link href={item.link} key={key}>
+                    <DropdownMenuItem>
+                      {item.icon}
+                      {item.title}
+                    </DropdownMenuItem>
+                  </Link>
+                );
+              })}
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
             <DropdownMenuItem onClick={() => Deconnexion()}>

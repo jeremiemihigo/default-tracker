@@ -70,6 +70,7 @@ function Awaiting_Field() {
     // { title: "Decision", accessorKey: "statut_decision" },
     { title: "In_charge", accessorKey: "In_charge" },
     { title: "Submited_By", accessorKey: "Submited_By" },
+    { title: "Observation", accessorKey: "Observation" },
   ];
   const columns: ColumnDef<IVerificationField_Front>[] = [
     {

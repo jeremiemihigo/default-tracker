@@ -96,6 +96,7 @@ function Fraude_verification() {
     // { title: "Decision", accessorKey: "statut_decision" },
     { title: "incharge", accessorKey: "incharge" },
     { title: "Submitedby", accessorKey: "submitedby" },
+    { title: "Observation", accessorKey: "Observation" },
   ];
   const columns1: ColumnDef<IVerificationField_Front>[] = keyColonnes.map(
     (cle) => {

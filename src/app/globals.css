@@ -121,6 +121,7 @@
   }
 }
 .rejected,
+.Inactif,
 .outsla {
   background-color: rgb(219, 70, 70);
   border-radius: 5px;
@@ -135,6 +136,7 @@
 }
 .approved,
 .insla,
+.Actif,
 .Done {
   background-color: rgb(14, 95, 45);
   border-radius: 5px;
