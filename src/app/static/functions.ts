@@ -3,14 +3,24 @@ import { IFeedback } from "../interface/IFeedbacks";
 
 export function excelSerialToJSDate(serial: number) {
   let days = serial;
+
+  // Ajustement pour le bug Excel sur 1900
   if (serial >= 60) {
     days -= 1;
   }
 
   const epoch = Date.UTC(1899, 11, 31);
   const msPerDay = 24 * 60 * 60 * 1000;
-  return new Date(epoch + days * msPerDay).toLocaleDateString();
+  const date = new Date(epoch + days * msPerDay);
+
+  // Format YYYY-MM-DD
+  const year = date.getUTCFullYear();
+  const month = String(date.getUTCMonth() + 1).padStart(2, "0");
+  const day = String(date.getUTCDate()).padStart(2, "0");
+
+  return new Date(`${year}-${month}-${day}`).getTime();
 }
+
 export const returnFeedback = (id: string, feedporto: IFeedback[]) => {
   if (_.filter(feedporto, { idFeedback: id }).length > 0) {
     return _.filter(feedporto, { idFeedback: id })[0].title;

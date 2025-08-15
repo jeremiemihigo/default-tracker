@@ -130,6 +130,27 @@ const data = {
       ],
     },
   ],
+  navpar120: [
+    {
+      title: "Par 120+",
+      url: "#",
+      icon: Target,
+      items: [
+        {
+          title: "Customer to track",
+          url: "/customer_par120",
+        },
+        {
+          title: "Report PAR 120+ for this month",
+          url: "/par120_dash",
+        },
+        {
+          title: "Upload and Refresh",
+          url: "/par120",
+        },
+      ],
+    },
+  ],
   status: [
     {
       name: "Historical status",
@@ -148,6 +169,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
       <SidebarContent>
         <NavProjects projects={data.projects} />
         <NavMain items={data.navMain} />
+        <NavMain items={data.navpar120} />
         <NavProjects projects={data.status} />
       </SidebarContent>
       <SidebarFooter>
