@@ -1,3 +1,4 @@
+import { IFeedback } from "./IFeedbacks";
 import { IShop } from "./settings/IAgent";
 
 export interface ICombo {
@@ -101,4 +102,5 @@ export interface IDataRefresh {
   feedback_staff: string;
   performance: string;
   staff_ayant_visite: string;
+  feedback?: IFeedback[];
 }

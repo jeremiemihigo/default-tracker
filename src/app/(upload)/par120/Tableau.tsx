@@ -1,7 +1,5 @@
 import { IDataRefresh } from "@/app/interface/IOther";
-import Excel from "@/app/Tools/Excel";
 import Loading from "@/app/Tools/loading";
-import { Button } from "@/components/ui/button";
 import React from "react";
 
 function TableauPayement() {
@@ -31,30 +29,9 @@ function TableauPayement() {
     initialize();
   }, []);
 
-  const refreshData = async () => {
-    try {
-      const res = await fetch("/api/par120/datarefresh", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const response = await res.json();
-      if (response) {
-        window.location.replace("/par120");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
   return (
     <div>
       {load && <Loading type="Loading" />}
-      <div className="gap-3 flex mt-3">
-        <Excel data={data} title="Export" filename="Data" />
-        <Button onClick={() => refreshData()}>Refresh Data</Button>
-      </div>
 
       <div className="overflow-x-auto rounded-lg shadow-lg">
         <table className="min-w-full border border-gray-200 bg-white">
@@ -66,12 +43,10 @@ function TableauPayement() {
                 "Shop",
                 "Region",
                 "Tracker",
-                "Last Update",
                 "Payment Status",
                 "Customer Status",
                 "Observation",
                 "Daily Rate",
-                "Date Refresh",
                 "Déjà Payé",
                 "Feedback Staff",
                 "Performance",
@@ -100,31 +75,43 @@ function TableauPayement() {
               data.map((row) => (
                 <tr
                   key={row.customer_id}
-                  className="hover:bg-gray-50 transition-colors"
+                  className="hover:bg-gray-50 transition-colors text-sm"
                 >
                   <td className="px-1 py-0.5 border-b">{row.customer_id}</td>
                   <td className="px-1 py-0.5 border-b">{row.customer_name}</td>
                   <td className="px-1 py-0.5 border-b">{row.shop}</td>
                   <td className="px-1 py-0.5 border-b">{row.region}</td>
                   <td className="px-1 py-0.5 border-b">{row.tracker_par}</td>
+
                   <td className="px-1 py-0.5 border-b">
-                    {new Date(
-                      row.current__status.date_update
-                    ).toLocaleDateString()}
+                    <p>{row.current__status.current_payment_status}</p>
+                    <p className="date_update">
+                      {new Date(
+                        row.current__status.date_update
+                      ).toLocaleDateString()}
+                    </p>
                   </td>
                   <td className="px-1 py-0.5 border-b">
-                    {row.current__status.current_payment_status}
-                  </td>
-                  <td className="px-1 py-0.5 border-b">
-                    {row.current__status.current_customer_status}
+                    <p>{row.current__status.current_customer_status}</p>
+                    <p className="date_update">
+                      {new Date(
+                        row.current__status.date_update
+                      ).toLocaleDateString()}
+                    </p>
                   </td>
                   <td className="px-1 py-0.5 border-b">{row.observation}</td>
-                  <td className="px-1 py-0.5 border-b">{row.daily_rate}$</td>
                   <td className="px-1 py-0.5 border-b">
-                    {new Date(row.date_refresh).toLocaleDateString()}
+                    {row.daily_rate.toFixed(1)}$
                   </td>
-                  <td className="px-1 py-0.5 border-b">{row.dejaPayer}$</td>
-                  <td className="px-1 py-0.5 border-b">{row.feedback_staff}</td>
+                  <td className="px-1 py-0.5 border-b">
+                    {row.dejaPayer.toFixed(1)}$
+                  </td>
+
+                  <td className="px-1 py-0.5 border-b">
+                    {row.feedback && row.feedback.length > 0
+                      ? row.feedback[0].title
+                      : row.feedback_staff}
+                  </td>
                   <td className="px-1 py-0.5 border-b">{row.performance}</td>
                   <td className="px-1 py-0.5 border-b">
                     {row.staff_ayant_visite}

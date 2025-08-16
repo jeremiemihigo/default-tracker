@@ -1,14 +1,22 @@
 import { IPar120 } from "@/app/interface/IOther";
+import { Combobox } from "@/app/Tools/combobox";
 import Excel from "@/app/Tools/Excel";
+import Popup from "@/app/Tools/Popup";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import React from "react";
 import { toast } from "sonner";
 import * as xlsx from "xlsx";
 
+const liens = [
+  { value: "refreshStatus", label: "Refresh status" },
+  { value: "uploadFilepar120", label: "Add customers" },
+];
+
 function UploadingPar120() {
   const [data, setData] = React.useState<IPar120[]>([]);
   const [sending, setSending] = React.useState<boolean>(false);
+  const [lien, setLien] = React.useState<string>("");
   const column = [
     "customer_id", //Upload
     "customer_name", //Upload
@@ -91,7 +99,7 @@ function UploadingPar120() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({ data, lien }),
       });
       const res = await response.json();
       if (res.status === 200) {
@@ -108,24 +116,53 @@ function UploadingPar120() {
       }
     }
   };
+  const refreshData = async () => {
+    try {
+      const res = await fetch("/api/par120/datarefresh", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const response = await res.json();
+      if (response) {
+        window.location.replace("/par120");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
-    <div className="flex w-full items-center gap-3">
-      <Input
-        accept=".xlsx"
-        onChange={(e) => readUploadFile(e)}
-        id="picture"
-        className="w-lg"
-        type="file"
-      />
-      {data.length > 0 && (
-        <Button disabled={sending} onClick={(event) => sendData(event)}>
-          Submit
-        </Button>
-      )}
-      <Excel
-        data={template}
-        filename="Template PAR 120+"
-        title="Download template"
+    <div className=" gap-3 mb-2">
+      <Popup
+        title="Upload or refresh customer"
+        component={
+          <>
+            <div>
+              <Combobox data={liens} value={lien} setValue={setLien} />
+            </div>
+            <Input
+              accept=".xlsx"
+              onChange={(e) => readUploadFile(e)}
+              id="picture"
+              type="file"
+            />
+
+            <div className="flex gap-2">
+              <Button disabled={sending} onClick={(event) => sendData(event)}>
+                Submit
+              </Button>
+
+              <Excel
+                data={template}
+                filename="Template PAR 120+"
+                title="Download template"
+              />
+              <Button onClick={() => refreshData()}>Refresh Data</Button>
+            </div>
+          </>
+        }
+        btnname="Upload or refresh customer"
       />
     </div>
   );

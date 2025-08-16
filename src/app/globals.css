@@ -129,6 +129,7 @@
 }
 .pending,
 .In_Process,
+.no_action,
 .verification {
   background-color: rgb(196, 198, 91);
   border-radius: 5px;
@@ -137,6 +138,8 @@
 .approved,
 .insla,
 .Actif,
+.reactivation,
+.repossession,
 .Done {
   background-color: rgb(14, 95, 45);
   border-radius: 5px;
@@ -211,4 +214,7 @@
   justify-content: center;
   width: 100%;
   height: 80vh;
+}
+.date_update {
+  font-size: 11px;
 }

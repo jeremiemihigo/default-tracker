@@ -127,6 +127,10 @@ const data = {
           title: "Customer to track",
           url: "/upload_customer",
         },
+        {
+          title: "Upload PAR 120+",
+          url: "/par120",
+        },
       ],
     },
   ],
@@ -141,12 +145,12 @@ const data = {
           url: "/customer_par120",
         },
         {
-          title: "Report PAR 120+ for this month",
+          title: "Report PAR 120+",
           url: "/par120_dash",
         },
         {
-          title: "Upload and Refresh",
-          url: "/par120",
+          title: "Actualisation PAR",
+          url: "/actualisation_par",
         },
       ],
     },
