@@ -66,6 +66,7 @@ function TableauPayement() {
               <thead className="bg-gray-100">
                 <tr>
                   {[
+                    "#",
                     "Customer ID",
                     "Customer Name",
                     "Shop",
@@ -99,11 +100,12 @@ function TableauPayement() {
                     </td>
                   </tr>
                 ) : (
-                  data.map((row) => (
+                  data.map((row, key) => (
                     <tr
                       key={row.customer_id}
                       className="hover:bg-gray-50 transition-colors text-sm"
                     >
+                      <td className="px-1 py-0.5 border-b">{key + 1}</td>
                       <td className="px-1 py-0.5 border-b">
                         {row.customer_id}
                       </td>
