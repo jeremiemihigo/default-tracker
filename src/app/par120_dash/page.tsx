@@ -193,10 +193,18 @@ function PagePar120Dash() {
                   <td className="border border-gray-300 px-2 py-1">
                     {item.Remaining_daily_action_target}
                   </td>
-                  <td className="border border-gray-300 px-2 py-1">0</td>
-                  <td className="border border-gray-300 px-2 py-1">0</td>
-                  <td className="border border-gray-300 px-2 py-1">0</td>
-                  <td className="border border-gray-300 px-2 py-1">0</td>
+                  <td className="border border-gray-300 px-2 py-1">
+                    {item.action_hier}
+                  </td>
+                  <td className="border border-gray-300 px-2 py-1">
+                    {item.action_hier_visited}
+                  </td>
+                  <td className="border border-gray-300 px-2 py-1">
+                    {item.all_visite_hier}
+                  </td>
+                  <td className="border border-gray-300 px-2 py-1">
+                    {item.hier_par120}
+                  </td>
                 </tr>
               ))}
             </tbody>

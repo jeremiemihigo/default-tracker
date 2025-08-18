@@ -83,6 +83,10 @@ export interface IRapportPar120 {
   "Obj_PAR120+": number;
   "%_Realisation_default": number;
   Remaining_daily_action_target: number;
+  all_visite_hier: number;
+  hier_par120: number;
+  action_hier: number;
+  action_hier_visited: number;
 }
 export interface IDataRefresh {
   customer_id: string;
