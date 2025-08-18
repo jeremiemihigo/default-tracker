@@ -7,6 +7,17 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import React from "react";
 
+const datafilter = [
+  { label: "Name", value: "Name" },
+  { label: "ID", value: "ID" },
+  { label: "Shop name", value: "Shop" },
+  { label: "Region name", value: "Region" },
+  { label: "Contact", value: "Contact" },
+  { label: "Fonction", value: "Fonction" },
+  { label: "Status", value: "Status" },
+  { label: "Edited_by", value: "Edited_by" },
+];
+
 function Agents() {
   const [donner, setData] = React.useState<IAgent[]>([]);
   const loadingData = async () => {
@@ -93,7 +104,7 @@ function Agents() {
         data={donner}
         columns={[...columns1, ...columns_option]}
         customer_id="ID"
-        search_placeholder="Filter by ID Agent"
+        datafilter={datafilter}
       />
     </HeaderComponent>
   );
