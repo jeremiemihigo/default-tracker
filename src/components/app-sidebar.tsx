@@ -149,7 +149,7 @@ const data = {
           url: "/par120_dash",
         },
         {
-          title: "Actualisation PAR",
+          title: "Obj PAR 120+",
           url: "/actualisation_par",
         },
       ],
