@@ -40,6 +40,29 @@ const postes = [
     label: "PA",
   },
 ];
+const datafilter = [
+  { label: "Customer ID", value: "customer_id" },
+  { label: "Customer name", value: "customer_name" },
+  { label: "Shop name", value: "shop" },
+  { label: "Region name", value: "region" },
+  { label: "Par", value: "par" },
+  { label: "Feedback_last_vm", value: "feedback_last_vm" },
+  { label: "Date_last_vm", value: "date_last_vm" },
+  { label: "Agent_last_vm", value: "agent_last_vm" },
+  {
+    label: "Last_vm_for_categorie_id",
+    value: "last_vm_for_categorie_id",
+  },
+  {
+    label: "Feedback_call",
+    value: "feedback_call",
+  },
+
+  { label: "Current status", value: "currentFeedback" },
+  { label: "incharge", value: "incharge" },
+  { label: "Submitedby", value: "submitedby" },
+  { label: "Observation", value: "Observation" },
+];
 function Fraude_verification() {
   const [data, setData] = useState<IVerificationField_Front[]>([]);
   const [value, setValue] = useState<string>("");
@@ -161,7 +184,7 @@ function Fraude_verification() {
             data={data}
             columns={[...columns, ...columns1]}
             customer_id="customer_id"
-            search_placeholder="Filter by customer ID"
+            datafilter={datafilter}
           />
         </>
       )}

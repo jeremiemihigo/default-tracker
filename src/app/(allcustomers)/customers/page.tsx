@@ -11,8 +11,28 @@ import { ArrowUpDown } from "lucide-react";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import Individually from "./individually/Individually";
 
+const colonneFilter = [
+  { label: "Customer ID", value: "customer_id" },
+  { label: "Customer name", value: "customer_name" },
+  { label: "Shop name", value: "shop" },
+  { label: "Region name", value: "region" },
+  { label: "Par", value: "par" },
+  { label: "In process", value: "In_process" },
+  { label: "Feedback_call", value: "Feedback_call" },
+  { label: "Feedback PA or Tech", value: "Feedback_PA_or_Tech" },
+  { label: "ZBM,RS,SM & TL", value: "zbm_rs_sm_tl" },
+  { label: "Feedback_PO", value: "Feedback_PO" },
+  { label: "Current status", value: "Current_status" },
+  { label: "Action", value: "Action" },
+  { label: "Decision", value: "Decision" },
+  { label: "Expected cash", value: "expected_cash" },
+  { label: "Cash Paid", value: "cash_Paid" },
+  { label: "In charge", value: "In_charge" },
+];
+
 function Customers() {
   const [data, setData] = useState<ITclient[]>([]);
+
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const submitLogin = async () => {
     try {
@@ -56,7 +76,7 @@ function Customers() {
     { title: "Action", accessorKey: "Action" },
     { title: "Decision", accessorKey: "Decision" },
     { title: "Expected cash", accessorKey: "expected_cash" },
-    { title: "Cash Pay", accessorKey: "cash_Pay" },
+    { title: "Cash Paid", accessorKey: "cash_Paid" },
     { title: "In charge", accessorKey: "In_charge" },
   ];
 
@@ -110,7 +130,7 @@ function Customers() {
             data={data}
             columns={columns1}
             customer_id="customer_id"
-            search_placeholder="Filter by customer ID"
+            datafilter={colonneFilter}
           />
         </>
       )}

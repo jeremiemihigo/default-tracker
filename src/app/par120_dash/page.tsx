@@ -42,32 +42,32 @@ function PagePar120Dash() {
                   colSpan={5}
                   className="bg-blue-900 border border-gray-300 py-2"
                 >
-                  RENSEIGNEMENTS STAFF
+                  STAFF INFORMATION
                 </th>
                 <th
                   colSpan={9}
                   className="bg-yellow-400 border border-gray-300 py-2 text-black"
                 >
-                  Visite ménages staff
+                  Staff household visit
                 </th>
                 <th
                   colSpan={5}
                   className="bg-red-500 border border-gray-300 py-2"
                 >
-                  Action en objectif
+                  Actions in objective
                 </th>
                 <th
                   colSpan={4}
                   className="bg-green-500 border border-gray-300 py-2"
                 >
-                  Suivi journalier des actions et visites
+                  Daily monitoring of actions and visits
                 </th>
               </tr>
               <tr className="bg-gray-200 text-black">
                 <th className="border border-gray-300 px-2 py-1">Region</th>
                 <th className="border border-gray-300 px-2 py-1">Shop</th>
                 <th className="border border-gray-300 px-2 py-1">
-                  Mon staff en charge
+                  My staff in charge
                 </th>
                 <th className="border border-gray-300 px-2 py-1">Fonction</th>
                 <th className="border border-gray-300 px-2 py-1">

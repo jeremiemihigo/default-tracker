@@ -12,8 +12,8 @@ type Props = {
   setDonner: React.Dispatch<React.SetStateAction<IShowDataPar[]>>;
 };
 const disponibleData = [
-  { label: "Oui", value: "Oui" },
-  { label: "Non", value: "Non" },
+  { label: "Yes", value: "Yes" },
+  { label: "No", value: "No" },
 ];
 function Formulaire({ data, setDonner, donner }: Props) {
   const [value, setValue] = React.useState("");
@@ -64,7 +64,7 @@ function Formulaire({ data, setDonner, donner }: Props) {
           onClick={() => sendData()}
           className="w-full"
         >
-          Valider
+          Save
         </Button>
       </div>
     </div>

@@ -32,7 +32,6 @@ export async function PUT(request: NextRequest) {
     body: JSON.stringify({ donner }),
   });
   const data = await res.json();
-  console.log(data);
   return NextResponse.json({
     data,
     status: res.status,

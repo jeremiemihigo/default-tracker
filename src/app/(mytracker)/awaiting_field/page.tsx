@@ -12,6 +12,32 @@ import { ArrowUpDown, SquarePen } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import Changestatus from "./changestatus";
 
+const datafilter = [
+  { label: "Customer ID", value: "customer_id" },
+  { label: "Customer name", value: "customer_name" },
+  { label: "Shop name", value: "shop" },
+  { label: "Region name", value: "region" },
+  { label: "Par", value: "par" },
+  { label: "Feedback_last_vm", value: "Feedback_last_vm" },
+  { label: "Date_last_vm", value: "date_last_vm" },
+  { label: "Agent_last_vm", value: "agent_last_vm" },
+  {
+    label: "Last_vm_for_categorie_id",
+    value: "last_vm_for_categorie_id",
+  },
+  {
+    label: "Feedback_call",
+    value: "feedback_call",
+  },
+
+  { label: "Current status", value: "currentFeedback" },
+  // { title: "Action", accessorKey: "action" },
+  // { title: "Decision", accessorKey: "statut_decision" },
+  { label: "In_charge", value: "In_charge" },
+  { label: "Submited_By", value: "Submited_By" },
+  { label: "Observation", value: "Observation" },
+];
+
 function Awaiting_Field() {
   const [data, setData] = useState<IVerificationField_Front[]>([]);
   const [value, setValue] = useState<string>("PO");
@@ -142,7 +168,7 @@ function Awaiting_Field() {
             data={data}
             columns={[...columns, ...columns1]}
             customer_id="customer_id"
-            search_placeholder="Filter by customer ID"
+            datafilter={datafilter}
           />
         </>
       )}

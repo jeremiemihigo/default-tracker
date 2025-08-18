@@ -10,6 +10,21 @@ import { ArrowUpDown, SquarePen } from "lucide-react";
 import { useEffect, useState } from "react";
 import ChangeDecision from "./decision";
 
+const datafilter = [
+  { label: "Customer ID", value: "customer_id" },
+  { label: "Customer name", value: "customer_name" },
+  { label: "Shop", value: "shop" },
+  { label: "Region", value: "region" },
+  { label: "Par", value: "par" },
+  { label: "Last feedback", value: "lastfeedback" },
+  { label: "Next feedback", value: "nextfeedback" },
+  { label: "sla", value: "SLA" },
+  { label: "createdAt", value: "createdAt" },
+  { label: "Submitedby", value: "submitedBy" },
+  { label: "type Decision", value: "typeDecision" },
+  // { title: "statut Decision", accessorKey: "statutDecision" },
+];
+
 function Confirmed_fraude() {
   const [data, setData] = useState<ICasValider[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -125,7 +140,7 @@ function Confirmed_fraude() {
           data={data}
           columns={[...columns, ...columns1, ...columns2]}
           customer_id="customer_id"
-          search_placeholder="Filter by customer ID"
+          datafilter={datafilter}
         />
       )}
     </HeaderComponent>

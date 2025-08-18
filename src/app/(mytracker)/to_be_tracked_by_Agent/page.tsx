@@ -9,6 +9,18 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import React from "react";
 
+const datafilter = [
+  { label: "Customer ID", value: "customer_id" },
+  { label: "Customer name", value: "customer_name" },
+  { label: "Shop name", value: "shop" },
+  { label: "Par", value: "par" },
+  { label: "Date Save", value: "Date_Save" },
+  { label: "Feedback", value: "feedback" },
+  { label: "Id_who_had_visited", value: "Id_who_had_visited" },
+  { label: "Agent_who_had_visited", value: "agent_who_had_visited" },
+  { label: "Feedback_call", value: "Feedback_call" },
+];
+
 function To_be_tracked_by_Agent() {
   const [data, setData] = React.useState<IVisitedAgent[]>([]);
   const [load, setLoad] = React.useState<boolean>(true);
@@ -76,7 +88,7 @@ function To_be_tracked_by_Agent() {
             data={data}
             columns={columns}
             customer_id="customer_id"
-            search_placeholder="Filter by customer ID"
+            datafilter={datafilter}
           />
         </>
       )}

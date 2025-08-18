@@ -10,6 +10,19 @@ import { ArrowUpDown, SquarePen } from "lucide-react";
 import { useEffect, useState } from "react";
 import ChangeDecision from "../confirmed_fraude/decision";
 
+const datafilter = [
+  { label: "Customer ID", value: "customer_id" },
+  { label: "Customer name", value: "customer_name" },
+  { label: "Shop name", value: "shop" },
+  { label: "Region name", value: "region" },
+  { label: "Par", value: "par" },
+  { label: "Last feedback", value: "lastfeedback" },
+  { label: "Next feedback", value: "nextfeedback" },
+  { label: "sla", value: "SLA" },
+
+  { label: "Submitedby", value: "submitedBy" },
+];
+
 function Confirmed_field() {
   const [data, setData] = useState<ICasValider[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -103,7 +116,7 @@ function Confirmed_field() {
           data={data}
           columns={[...columns, ...columns1]}
           customer_id="customer_id"
-          search_placeholder="Filter by customer ID"
+          datafilter={datafilter}
         />
       )}
     </HeaderComponent>

@@ -71,8 +71,8 @@ export async function GET(request: NextRequest) {
         submitedBy: capitalize(x.submitedBy),
         In_process: x.actif ? "In_Process" : "Done",
         Current_status: capitalize(x.tfeedback?.title),
-        expected_cash: x.cashattendu ? "$" + x.cashattendu : "$0",
-        cash_Pay: x.cashPayer ? "$" + x.cashPayer : "$0",
+        expected_cash: x.cashattendu ? "$" + x.cashattendu.toFixed(2) : "$0",
+        cash_Paid: x.cashPayer ? "$" + x.cashPayer.toFixed(2) : "$0",
         Feedback_call: capitalize(
           returnFeedback(x.derniereappel?.sioui_texte, "No_calls") || "No_calls"
         ),

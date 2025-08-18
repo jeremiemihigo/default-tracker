@@ -9,6 +9,21 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import { useEffect, useState } from "react";
 
+const datafilter = [
+  { label: "Customer ID", value: "customer_id" },
+  { label: "Customer name", value: "customer_name" },
+  { label: "Shop name", value: "shop" },
+  { label: "Region name", value: "region" },
+  { label: "agent_name", value: "agent_name" },
+  { label: "agent_fonction", value: "agent_fonction" },
+  { label: "PayementStatut", value: "PayementStatut" },
+  { label: "clientStatut", value: "clientStatut" },
+  { label: "consExpDays", value: "consExpDays" },
+  { label: "dateSave", value: "dateSave" },
+  { label: "raison", value: "feedbackvm" },
+  // { title: "indt", accessorKey: "indt", },
+];
+
 function All_visites() {
   const [data, setData] = useState<IVisitsField[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -82,7 +97,7 @@ function All_visites() {
             data={data}
             columns={columns}
             customer_id="customer_id"
-            search_placeholder="Filter by customer ID"
+            datafilter={datafilter}
           />
         </>
       )}

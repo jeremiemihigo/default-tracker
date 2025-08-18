@@ -10,6 +10,15 @@ import { ArrowUpDown, SquarePen } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import Formulaire from "./Formulaire";
 
+const datafilter = [
+  { label: "Name", value: "Name" },
+  { label: "Fonction", value: "Fonction" },
+  { label: "Size", value: "taille" },
+  { label: "Obj_PAR120", value: "Obj_PAR120" },
+  { label: "ID", value: "codeAgent" },
+  { label: "Available", value: "disponible" },
+];
+
 function Fraude_verification() {
   const [data, setData] = useState<IShowDataPar[]>([]);
   const [value, setValue] = useState<string>("");
@@ -48,9 +57,10 @@ function Fraude_verification() {
   const keyColonnes = [
     { title: "Name", accessorKey: "Name" },
     { title: "Fonction", accessorKey: "Fonction" },
+    { title: "Size", accessorKey: "taille" },
     { title: "Obj_PAR120", accessorKey: "Obj_PAR120" },
-    { title: "codeAgent", accessorKey: "codeAgent" },
-    { title: "disponible", accessorKey: "disponible" },
+    { title: "ID", accessorKey: "codeAgent" },
+    { title: "Available", accessorKey: "disponible" },
   ];
   const columns1: ColumnDef<IShowDataPar>[] = keyColonnes.map((cle) => {
     return {
@@ -106,7 +116,7 @@ function Fraude_verification() {
             data={data}
             columns={[...columns, ...columns1]}
             customer_id="Name"
-            search_placeholder="Filter by Name"
+            datafilter={datafilter}
           />
         </>
       )}

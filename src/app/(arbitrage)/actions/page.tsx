@@ -11,6 +11,16 @@ import { ArrowUpDown, SquarePen } from "lucide-react";
 import React from "react";
 import ValidationAction from "./ValidationAction";
 
+const datafilter = [
+  { label: "Customer ID", value: "customer_id" },
+  { label: "customer_name", value: "customer_name" },
+  { label: "current", value: "current" },
+  { label: "Shop name", value: "shop" },
+  { label: "Region name", value: "region" },
+  { label: "Par", value: "par" },
+  { label: "Submitedby", value: "submitedBy" },
+];
+
 function Actions() {
   const [actions, setActions] = React.useState<IAction[]>([]);
   const [load, setLoad] = React.useState<boolean>(true);
@@ -114,7 +124,7 @@ function Actions() {
             data={actions}
             columns={[...columns, ...columns1]}
             customer_id="customer_id"
-            search_placeholder="Filter by customer ID"
+            datafilter={datafilter}
           />
         </>
       )}

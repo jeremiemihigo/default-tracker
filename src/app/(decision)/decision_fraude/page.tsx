@@ -11,6 +11,15 @@ import { useEffect, useState } from "react";
 import Validation from "../decision_field/validation";
 import Commentaire from "./Commentaire";
 
+const datafilter = [
+  { label: "Customer ID", value: "customer_id" },
+  { label: "Shop name", value: "shop" },
+  { label: "Region name", value: "region" },
+  { label: "Decision", value: "decision" },
+  { label: "Statut", value: "statut" },
+  { label: "Submitedby", value: "createdBy" },
+];
+
 function Decision_fraude() {
   const [data, setData] = useState<IDecision[]>([]);
 
@@ -142,7 +151,7 @@ function Decision_fraude() {
             data={data}
             columns={[...columns, ...columns1, ...columncomment]}
             customer_id="customer_id"
-            search_placeholder="Filter by customer ID"
+            datafilter={datafilter}
           />
         </>
       )}

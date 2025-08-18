@@ -75,10 +75,10 @@ function TableauPayement() {
                     "Observation",
                     "Daily Rate",
                     "Date Refresh",
-                    "Déjà Payé",
+                    "Already Paid",
                     "Feedback",
                     "Performance",
-                    "Staff Ayant Visité",
+                    "Staff Having Visited",
                   ].map((header) => (
                     <th
                       key={header}
