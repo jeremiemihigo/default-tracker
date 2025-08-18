@@ -52,13 +52,13 @@ function PagePar120Dash() {
                 </th>
                 <th
                   colSpan={5}
-                  className="bg-green-500 border border-gray-300 py-2"
+                  className="bg-red-500 border border-gray-300 py-2"
                 >
                   Action en objectif
                 </th>
                 <th
                   colSpan={4}
-                  className="bg-red-500 border border-gray-300 py-2"
+                  className="bg-green-500 border border-gray-300 py-2"
                 >
                   Suivi journalier des actions et visites
                 </th>
