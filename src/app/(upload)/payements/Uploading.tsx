@@ -7,27 +7,27 @@ import React from "react";
 import { toast } from "sonner";
 import * as xlsx from "xlsx";
 
-function UploadingPayment() {
+type Props = {
+  load: boolean;
+  setLoad: React.Dispatch<React.SetStateAction<boolean>>;
+};
+function UploadingPayment({ load, setLoad }: Props) {
   const [data, setData] = React.useState<IPayement[]>([]);
-  const [sending, setSending] = React.useState<boolean>(false);
   const column = [
     "account_id",
-    "shop_name",
     "amount",
     "transaction_time",
-    "processed_date",
     "payment_status",
     "provider_transact_reference",
-    "provider",
   ];
   const readUploadFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    setSending(true);
+    setLoad(true);
     try {
       const files = e.target.files;
       if (!files || files.length === 0) {
         toast("No file selected.");
-        setSending(false);
+        setLoad(false);
         return;
       }
       const reader = new FileReader();
@@ -69,37 +69,34 @@ function UploadingPayment() {
           alert(JSON.stringify(innerErr));
           return;
         } finally {
-          setSending(false);
+          setLoad(false);
         }
       };
 
       reader.onerror = () => {
         toast("Failed to read file.");
-        setSending(false);
+        setLoad(false);
       };
 
       reader.readAsArrayBuffer(files[0]);
     } catch (error) {
       alert("Error " + (error as Error).message);
-      setSending(false);
+      setLoad(false);
     }
   };
 
   const template = [
     {
       account_id: "",
-      shop_name: "",
       transaction_time: "",
       amount: "",
-      processed_date: "",
       payment_status: "",
       provider_transact_reference: "",
-      provider: "",
     },
   ];
   const sendData = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
-    setSending(true);
+    setLoad(true);
     try {
       const response = await fetch("/api/payement", {
         method: "POST",
@@ -113,7 +110,32 @@ function UploadingPayment() {
         window.location.replace("/payements");
       } else {
         toast(res.data);
-        setSending(false);
+        setLoad(false);
+      }
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        toast(error.message);
+      } else {
+        console.log("An unknown error occurred", error);
+      }
+    }
+  };
+  const deleteData = async (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.preventDefault();
+    setLoad(true);
+    try {
+      const response = await fetch("/api/payement", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const res = await response.json();
+      if (res.status === 200) {
+        window.location.replace("/payements");
+      } else {
+        toast(res.data);
+        setLoad(false);
       }
     } catch (error: unknown) {
       if (error instanceof Error) {
@@ -134,10 +156,13 @@ function UploadingPayment() {
         type="file"
       />
       {data.length > 0 && (
-        <Button disabled={sending} onClick={(event) => sendData(event)}>
+        <Button disabled={load} onClick={(event) => sendData(event)}>
           Submit
         </Button>
       )}
+      <Button onClick={(event) => deleteData(event)} variant="destructive">
+        Delete data
+      </Button>
       <Excel
         data={template}
         filename="Template payment"

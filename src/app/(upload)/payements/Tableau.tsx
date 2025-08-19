@@ -2,10 +2,12 @@ import { IPayement } from "@/app/interface/IOther";
 import Loading from "@/app/Tools/loading";
 import Tableau from "@/app/Tools/Tableau";
 import React from "react";
-
-function TableauPayement() {
+type Props = {
+  load: boolean;
+  setLoad: React.Dispatch<React.SetStateAction<boolean>>;
+};
+function TableauPayement({ load, setLoad }: Props) {
   const [data, setData] = React.useState<IPayement[]>([]);
-  const [load, setLoad] = React.useState<boolean>(true);
   const loadingData = async () => {
     setLoad(true);
     try {
@@ -31,21 +33,18 @@ function TableauPayement() {
   }, []);
   const keycolonnes = [
     { accessorKey: "account_id", title: "account_id" },
-    { accessorKey: "shop_name", title: "shop_name" },
     { accessorKey: "amount", title: "amount" },
     { accessorKey: "transaction_time", title: "transaction_time" },
-    { accessorKey: "processed_date", title: "processed_date" },
     { accessorKey: "payment_status", title: "payment_status" },
     {
       accessorKey: "provider_transact_reference",
       title: "provider_transact_reference",
     },
-    { accessorKey: "provider", title: "provider" },
   ];
   return (
     <div>
       {load && <Loading type="Loading" />}
-      {data.length > 0 && (
+      {data.length > 0 && !load && (
         <Tableau
           data={data}
           keyColonnes={keycolonnes}
