@@ -136,7 +136,7 @@ const data = {
   ],
   navpar120: [
     {
-      title: "Par 120+",
+      title: "Tracking Par 120+",
       url: "#",
       icon: Target,
       items: [
