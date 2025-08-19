@@ -31,52 +31,48 @@ function UploadingPar120() {
   const readUploadFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setSending(true);
-    try {
-      const files = e.target.files;
-      if (!files || files.length === 0) {
-        toast("No file selected.");
-        setSending(false);
-        return;
-      }
-      const reader = new FileReader();
-      reader.onload = (ev: ProgressEvent<FileReader>) => {
-        try {
-          const data = ev.target?.result;
-          if (!data) {
-            throw new Error("Empty file data");
-          }
-          const workbook = xlsx.read(data, { type: "array" });
-          const sheetName = workbook.SheetNames[0];
-          const worksheet = workbook.Sheets[sheetName];
-          const json: IPar120[] = xlsx.utils.sheet_to_json(worksheet);
-
-          const colonnes = Object.keys(json[0]);
-          const notexist = column.filter((x) => !colonnes.includes(x));
-
-          if (notexist.length > 0) {
-            toast("Certaines colonnes ne sont pas dans le fichier uploader");
-            return;
-          } else {
-            setData(json);
-          }
-        } catch (innerErr) {
-          alert(JSON.stringify(innerErr));
-          return;
-        } finally {
-          setSending(false);
-        }
-      };
-
-      reader.onerror = () => {
-        toast("Failed to read file.");
-        setSending(false);
-      };
-
-      reader.readAsArrayBuffer(files[0]);
-    } catch (error) {
-      alert("Error " + (error as Error).message);
+    const files = e.target.files;
+    if (!files || files.length === 0) {
+      toast("No file selected.");
       setSending(false);
+      return;
     }
+
+    const reader = new FileReader();
+    reader.onload = (ev: ProgressEvent<FileReader>) => {
+      try {
+        const donner = ev.target?.result;
+        if (!donner) throw new Error("Empty file data");
+        const workbook = xlsx.read(donner, { type: "array" });
+        const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+        const json: IPar120[] = xlsx.utils.sheet_to_json(worksheet);
+        console.log(json);
+        if (!json.length) {
+          toast("Le fichier est vide.");
+          return;
+        }
+        const colonnes = Object.keys(json[0]);
+        const notexist = column.filter((x) => !colonnes.includes(x));
+
+        if (notexist.length > 0) {
+          toast("Colonnes manquantes: " + notexist.join(", "));
+          return;
+        }
+
+        setData(json);
+      } catch (err) {
+        toast("Erreur: " + (err as Error).message);
+      } finally {
+        setSending(false);
+      }
+    };
+
+    reader.onerror = () => {
+      toast("Failed to read file.");
+      setSending(false);
+    };
+
+    reader.readAsArrayBuffer(files[0]);
   };
 
   const template = [
@@ -145,7 +141,8 @@ function UploadingPar120() {
             <Input
               accept=".xlsx"
               onChange={(e) => readUploadFile(e)}
-              id="picture"
+              id="filecustomer"
+              name="filecustomer"
               type="file"
             />
 

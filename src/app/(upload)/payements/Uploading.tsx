@@ -33,11 +33,11 @@ function UploadingPayment() {
       const reader = new FileReader();
       reader.onload = (ev: ProgressEvent<FileReader>) => {
         try {
-          const data = ev.target?.result;
-          if (!data) {
+          const donner_ = ev.target?.result;
+          if (!donner_) {
             throw new Error("Empty file data");
           }
-          const workbook = xlsx.read(data, { type: "array" });
+          const workbook = xlsx.read(donner_, { type: "array" });
           const sheetName = workbook.SheetNames[0];
           const worksheet = workbook.Sheets[sheetName];
           const json: IPayement[] = xlsx.utils.sheet_to_json(worksheet);
@@ -128,7 +128,8 @@ function UploadingPayment() {
       <Input
         accept=".xlsx"
         onChange={(e) => readUploadFile(e)}
-        id="picture"
+        id="payements"
+        name="payements"
         className="w-lg"
         type="file"
       />

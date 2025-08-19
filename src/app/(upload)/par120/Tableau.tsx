@@ -104,7 +104,7 @@ function TableauPayement() {
                     {row.daily_rate.toFixed(1)}$
                   </td>
                   <td className="px-1 py-0.5 border-b">
-                    {row.dejaPayer.toFixed(1)}$
+                    {row.dejaPayer && row.dejaPayer.toFixed(1)}$
                   </td>
 
                   <td className="px-1 py-0.5 border-b">

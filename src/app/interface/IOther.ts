@@ -54,6 +54,7 @@ export interface ISidebar {
 export interface IPar120 {
   customer_id: string;
   customer_name: string;
+  par: string;
   shop: string;
   region: string;
   track_by: string;
