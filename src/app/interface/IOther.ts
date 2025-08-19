@@ -95,6 +95,7 @@ export interface IDataRefresh {
   shop: string;
   region: string;
   tracker_par: string;
+  par: string;
   current__status: {
     date_update: number;
     current_payment_status: string;

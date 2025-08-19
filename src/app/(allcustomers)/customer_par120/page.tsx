@@ -72,6 +72,7 @@ function TableauPayement() {
                     "Customer ID",
                     "Customer Name",
                     "Shop",
+                    "Par",
                     "Payment Status",
                     "Customer Status",
                     "Observation",
@@ -115,6 +116,7 @@ function TableauPayement() {
                         {row.customer_name}
                       </td>
                       <td className="px-1 py-0.5 border-b">{row.shop}</td>
+                      <td className="px-1 py-0.5 border-b">{row.par}</td>
 
                       <td className="px-1 py-0.5 border-b grid">
                         <p> {row.current__status.current_payment_status}</p>
@@ -166,7 +168,7 @@ function TableauPayement() {
                                     shop: row.shop,
                                     region: row.region,
                                     idHistorique: row._id,
-                                    par: "PAR 120+",
+                                    par: row.par,
                                     customer_name: row.customer_name,
                                   }}
                                 />

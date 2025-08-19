@@ -26,6 +26,7 @@ function UploadingPar120() {
     "current_payment_status",
     "current_customer_status",
     "daily_rate",
+    "par",
   ];
   const readUploadFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
