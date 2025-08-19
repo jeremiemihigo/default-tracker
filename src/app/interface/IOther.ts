@@ -89,6 +89,7 @@ export interface IRapportPar120 {
   action_hier_visited: number;
 }
 export interface IDataRefresh {
+  _id: string;
   customer_id: string;
   customer_name: string;
   shop: string;

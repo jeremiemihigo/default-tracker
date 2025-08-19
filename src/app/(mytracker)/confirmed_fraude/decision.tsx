@@ -1,6 +1,5 @@
 "use client";
 
-import { ICasValider } from "@/app/interface/TClient";
 import { Combobox } from "@/app/Tools/combobox";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -8,7 +7,14 @@ import { useState } from "react";
 import { toast } from "sonner";
 
 type Props = {
-  data: ICasValider;
+  data: {
+    customer_id: string;
+    shop: string;
+    idHistorique: string;
+    region: string;
+    par: string;
+    customer_name: string;
+  };
 };
 const dataDecision = [
   { label: "WRITE_OFF", value: "WRITE_OFF" },
@@ -29,6 +35,8 @@ function ChangeDecision({ data }: Props) {
       shop: data.shop,
       idHistorique: data.idHistorique,
       region: data.region,
+      par: data.par,
+      customer_name: data.customer_name,
       decision,
     };
     const response = await fetch("/api/decision_/change_decision", {

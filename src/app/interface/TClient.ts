@@ -82,17 +82,20 @@ export interface IDecision {
   decision: "WRITE_OFF" | "OPT_OUT" | "TRACKING_ONGOING";
   createdBy: string;
   codeclient: string;
+  customer_name: string;
   region: string;
   shop: string;
   commentaire: IComment[];
   idDepartement: string;
   month: string;
+  par: string;
   statut: "APPROVED" | "PENDING" | "REJECTED";
   createdAt: string;
   _id: string;
 }
 export interface ICasValider {
   customer_id: string;
+  _id: string;
   customer_name: string;
   shop: string;
   par: string;

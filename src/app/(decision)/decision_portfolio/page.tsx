@@ -16,6 +16,7 @@ const datafilter = [
   { label: "Shop name", value: "shop" },
   { label: "Region name", value: "region" },
   { label: "Decision", value: "decision" },
+  { label: "Par", value: "par" },
   { label: "Statut", value: "statut" },
   { label: "Submitedby", value: "createdBy" },
 ];
@@ -54,9 +55,11 @@ function Decision_portfolio() {
   }, []);
   const keyColonnes = [
     { title: "Customer ID", accessorKey: "customer_id" },
+    { title: "Customer name", accessorKey: "customer_name" },
     { title: "Shop name", accessorKey: "shop" },
     { title: "Region name", accessorKey: "region" },
     { title: "Decision", accessorKey: "decision" },
+    { title: "Par", accessorKey: "par" },
     { title: "Statut", accessorKey: "statut" },
     { title: "Submitedby", accessorKey: "createdBy" },
   ];

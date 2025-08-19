@@ -1,8 +1,10 @@
 "use client";
+import ChangeDecision from "@/app/(mytracker)/confirmed_fraude/decision";
 import HeaderComponent from "@/app/header/Header";
 import { IDataRefresh } from "@/app/interface/IOther";
 import Excel from "@/app/Tools/Excel";
 import Loading from "@/app/Tools/loading";
+import Popup from "@/app/Tools/Popup";
 import { Button } from "@/components/ui/button";
 import React from "react";
 
@@ -151,7 +153,30 @@ function TableauPayement() {
                           : row.feedback_staff}
                       </td>
                       <td className="px-1 py-0.5 border-b">
-                        {row.performance}
+                        {["Lui-meme", "Pas lui-meme"].includes(
+                          row.performance
+                        ) ? (
+                          <>
+                            <Popup
+                              title="Decisions"
+                              component={
+                                <ChangeDecision
+                                  data={{
+                                    customer_id: row.customer_id,
+                                    shop: row.shop,
+                                    region: row.region,
+                                    idHistorique: row._id,
+                                    par: "PAR 120+",
+                                    customer_name: row.customer_name,
+                                  }}
+                                />
+                              }
+                              btnname={row.performance}
+                            />
+                          </>
+                        ) : (
+                          row.performance
+                        )}
                       </td>
                       <td className="px-1 py-0.5 border-b">
                         {row.staff_ayant_visite}
