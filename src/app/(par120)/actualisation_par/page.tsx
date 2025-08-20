@@ -1,6 +1,7 @@
 "use client";
 import HeaderComponent from "@/app/header/Header";
 import { IShowDataPar } from "@/app/interface/par120";
+import Excel from "@/app/Tools/Excel";
 import Loading from "@/app/Tools/loading";
 import Popup from "@/app/Tools/Popup";
 import Tableau_set_Header from "@/app/Tools/Tab_set_Header";
@@ -9,6 +10,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown, SquarePen } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import Formulaire from "./Formulaire";
+import Uploading from "./Upload";
 
 const datafilter = [
   { label: "Name", value: "Name" },
@@ -24,7 +26,7 @@ function Fraude_verification() {
   const [value, setValue] = useState<string>("");
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
-  const SubmitData = useCallback(async () => {
+  const LoadingData = useCallback(async () => {
     setIsLoading(true);
     try {
       const res = await fetch("/api/par120/actualisationpar", {
@@ -49,7 +51,7 @@ function Fraude_verification() {
 
   useEffect(() => {
     const initialize = async () => {
-      await SubmitData();
+      await LoadingData();
     };
     initialize();
   }, []);
@@ -112,6 +114,8 @@ function Fraude_verification() {
         <Loading type="Loading" />
       ) : (
         <>
+          <Excel data={data} title="Export" filename="PAR 120" />
+          <Uploading load={isLoading} setLoad={setIsLoading} />
           <Tableau_set_Header
             data={data}
             columns={[...columns, ...columns1]}

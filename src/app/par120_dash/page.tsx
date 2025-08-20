@@ -132,12 +132,26 @@ function PagePar120Dash() {
             <tbody>
               {data.map((item, i) => (
                 <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-gray-50"}>
-                  <td className="border border-gray-300 px-2 py-1">
-                    {item.region.denomination}
-                  </td>
-                  <td className="border border-gray-300 px-2 py-1">
-                    {item.shop?.[0]?.shop || ""}
-                  </td>
+                  {item.fonction === "PO" ? (
+                    <>
+                      <td
+                        className="border border-gray-300 px-2 py-1 text-center"
+                        colSpan={2}
+                      >
+                        {item.region.denomination}
+                      </td>
+                    </>
+                  ) : (
+                    <>
+                      <td className="border border-gray-300 px-2 py-1">
+                        {item.region.denomination}
+                      </td>
+                      <td className="border border-gray-300 px-2 py-1">
+                        {item.shop?.[0]?.shop || ""}
+                      </td>
+                    </>
+                  )}
+
                   <td className="border border-gray-300 px-2 py-1">
                     {item.name}
                   </td>

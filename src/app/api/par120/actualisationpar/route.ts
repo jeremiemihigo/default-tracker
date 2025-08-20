@@ -37,3 +37,21 @@ export async function PUT(request: NextRequest) {
     status: res.status,
   });
 }
+export async function POST(request: NextRequest) {
+  const token = request.cookies.get("access")?.value;
+  const data = await request.json();
+  const link = `${lien_dt}/updateParTrackFile`;
+  const res = await fetch(link, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "Application/json",
+      Authorization: "Bearer " + token,
+    },
+    body: JSON.stringify({ data }),
+  });
+  const response = await res.json();
+  return NextResponse.json({
+    data: response,
+    status: res.status,
+  });
+}
