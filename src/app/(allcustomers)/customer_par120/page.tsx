@@ -52,6 +52,7 @@ function TableauPayement() {
       console.log(error);
     }
   };
+  console.log(data);
 
   return (
     <HeaderComponent title="My Tracker PAR 120+">

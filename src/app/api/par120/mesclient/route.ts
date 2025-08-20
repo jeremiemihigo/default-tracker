@@ -12,10 +12,11 @@ export async function GET(request: NextRequest) {
     },
   });
   const data = await res.json();
-
-  const response = NextResponse.json({
-    data,
-    status: res.status,
-  });
-  return response;
+  if (res.status === 200) {
+    const response = NextResponse.json({
+      data,
+      status: res.status,
+    });
+    return response;
+  }
 }
