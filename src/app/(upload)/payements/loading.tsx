@@ -1,7 +1,9 @@
 "use client";
 
+import Loading from "@/app/Tools/loading";
+
 function loading() {
-  return <div>loading</div>;
+  return <Loading type="page" />;
 }
 
 export default loading;
