@@ -110,7 +110,7 @@ function PagePar120Dash() {
                   Obj PAR 120+
                 </th>
                 <th className="border border-gray-300 px-2 py-1">
-                  % Realisation default
+                  % Realisation PAR 120
                 </th>
                 <th className="border border-gray-300 px-2 py-1">
                   Remaining daily target
@@ -202,7 +202,7 @@ function PagePar120Dash() {
                     {item["Obj_PAR120+"]}
                   </td>
                   <td className="border border-gray-300 px-2 py-1">
-                    {item["%_Realisation_default"]}
+                    {item["%_Realisation_default"]}%
                   </td>
                   <td className="border border-gray-300 px-2 py-1">
                     {item.Remaining_daily_action_target}
