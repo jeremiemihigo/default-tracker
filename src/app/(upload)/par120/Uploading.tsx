@@ -46,7 +46,7 @@ function UploadingPar120() {
         const workbook = xlsx.read(donner, { type: "array" });
         const worksheet = workbook.Sheets[workbook.SheetNames[0]];
         const json: IPar120[] = xlsx.utils.sheet_to_json(worksheet);
-        console.log(json);
+
         if (!json.length) {
           toast("Le fichier est vide.");
           return;
@@ -113,22 +113,7 @@ function UploadingPar120() {
       }
     }
   };
-  const refreshData = async () => {
-    try {
-      const res = await fetch("/api/par120/datarefresh", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const response = await res.json();
-      if (response) {
-        window.location.replace("/par120");
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
+
   return (
     <div className=" gap-3 mb-2">
       <Popup
@@ -156,7 +141,6 @@ function UploadingPar120() {
                 filename="Template PAR 120+"
                 title="Download template"
               />
-              <Button onClick={() => refreshData()}>Refresh Data</Button>
             </div>
           </>
         }

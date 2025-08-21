@@ -1,36 +1,13 @@
 import { IPayement } from "@/app/interface/IOther";
-import Loading from "@/app/Tools/loading";
 import Tableau from "@/app/Tools/Tableau";
 import React from "react";
 type Props = {
   load: boolean;
   setLoad: React.Dispatch<React.SetStateAction<boolean>>;
+  setData: React.Dispatch<React.SetStateAction<IPayement[]>>;
+  data: IPayement[];
 };
-function TableauPayement({ load, setLoad }: Props) {
-  const [data, setData] = React.useState<IPayement[]>([]);
-  const loadingData = async () => {
-    setLoad(true);
-    try {
-      const result = await fetch("/api/payement", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const response = await result.json();
-      setData(response.data);
-      setLoad(false);
-    } catch (error) {
-      console.log(error);
-      setLoad(false);
-    }
-  };
-  React.useEffect(() => {
-    const initialize = async () => {
-      loadingData();
-    };
-    initialize();
-  }, []);
+function TableauPayement({ load, data }: Props) {
   const keycolonnes = [
     { accessorKey: "account_id", title: "account_id" },
     { accessorKey: "amount", title: "amount" },
@@ -43,7 +20,6 @@ function TableauPayement({ load, setLoad }: Props) {
   ];
   return (
     <div>
-      {load && <Loading type="Loading" />}
       {data.length > 0 && !load && (
         <Tableau
           data={data}
