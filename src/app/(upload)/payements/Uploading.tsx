@@ -143,7 +143,6 @@ function UploadingPayment({ load, setLoad, data }: Props) {
       }
     }
   };
-  console.log(donner);
   return (
     <div className="flex w-full items-center gap-3">
       <Input
