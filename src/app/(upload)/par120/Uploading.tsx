@@ -134,43 +134,48 @@ function UploadingPar120() {
   };
 
   return (
-    <div className=" gap-3 mb-2">
+    <div className=" flex gap-3 mb-2 p-2">
       <Popup
         title="Upload or refresh customer"
         component={
-          <>
+          <div>
             <div>
               <Combobox data={liens} value={lien} setValue={setLien} />
             </div>
-            {lien !== "" && (
-              <Input
-                accept=".xlsx"
-                onChange={(e) => readUploadFile(e)}
-                id="filecustomer"
-                name="filecustomer"
-                type="file"
-              />
-            )}
-
-            <div className="flex gap-2">
-              <Button disabled={sending} onClick={(event) => sendData(event)}>
-                Submit
-              </Button>
-
-              <Excel
-                data={template}
-                filename="Template PAR 120+"
-                title="Download template"
-              />
-              <Excel
-                data={templateRefresh}
-                filename="Refresh status"
-                title="Download template Refresh status"
-              />
+            <div className="mt-3">
+              {lien !== "" && (
+                <Input
+                  accept=".xlsx"
+                  onChange={(e) => readUploadFile(e)}
+                  id="filecustomer"
+                  name="filecustomer"
+                  type="file"
+                />
+              )}
             </div>
-          </>
+
+            <div className="mt-2">
+              <Button
+                className="w-full"
+                disabled={sending || data.length === 0 ? true : false}
+                onClick={(event) => sendData(event)}
+              >
+                {lien === "refreshStatus" ? "Refresh status" : "Submit"}
+              </Button>
+            </div>
+          </div>
         }
         btnname="Upload or refresh customer"
+      />
+      <Excel
+        data={template}
+        filename="Template PAR 120+"
+        title="Download template"
+      />
+      <Excel
+        data={templateRefresh}
+        filename="Refresh status"
+        title="Template Refresh"
       />
     </div>
   );
