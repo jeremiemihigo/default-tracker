@@ -48,6 +48,7 @@ export async function DELETE(request: NextRequest) {
     },
   });
   const result = await res.json();
+
   const response = NextResponse.json({
     data: result,
     status: res.status,
