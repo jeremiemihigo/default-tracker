@@ -18,12 +18,11 @@ function UploadingPayment({ load, setLoad, data }: Props) {
     "account_id",
     "amount",
     "transaction_time",
-    "payment_status",
     "provider_transact_reference",
   ];
   const readUploadFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    setLoad(true);
+
     try {
       const files = e.target.files;
       if (!files || files.length === 0) {
@@ -47,29 +46,23 @@ function UploadingPayment({ load, setLoad, data }: Props) {
             const worksheet = workbook.Sheets[sheetName];
             const json: IPayement[] = xlsx.utils.sheet_to_json(worksheet);
             const colonnes = Object.keys(json[0]);
+
             const notexist = column.filter((x) => !colonnes.includes(x));
             if (notexist.length > 0) {
               toast("Certaines colonnes ne sont pas dans le fichier uploader");
               return;
-            } else {
-              const donner = json.map((x) => {
-                return {
-                  account_id: x.account_id,
-                  amount: x.amount,
-                  payment_status: x.payment_status,
-                  processed_date: excelSerialToJSDate(
-                    parseInt(x.processed_date)
-                  ).toString(),
-                  provider: x.provider,
-                  provider_transact_reference: x.provider_transact_reference,
-                  shop_name: x.shop_name,
-                  transaction_time: excelSerialToJSDate(
-                    parseInt(x.transaction_time)
-                  ).toString(),
-                };
-              });
-              setDonner(donner);
             }
+            const donner = json.map((x) => {
+              return {
+                account_id: x.account_id,
+                amount: x.amount,
+                provider_transact_reference: x.provider_transact_reference,
+                transaction_time: excelSerialToJSDate(
+                  parseInt(x.transaction_time)
+                ).toString(),
+              };
+            });
+            setDonner(donner);
           } catch (innerErr) {
             alert(JSON.stringify(innerErr));
             return;
@@ -96,7 +89,6 @@ function UploadingPayment({ load, setLoad, data }: Props) {
       account_id: "",
       transaction_time: "",
       amount: "",
-      payment_status: "",
       provider_transact_reference: "",
     },
   ];
@@ -151,6 +143,7 @@ function UploadingPayment({ load, setLoad, data }: Props) {
       }
     }
   };
+  console.log(donner);
   return (
     <div className="flex w-full items-center gap-3">
       <Input

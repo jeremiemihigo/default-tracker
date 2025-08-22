@@ -18,7 +18,6 @@ function Uploading({ load, setLoad }: Props) {
   const column = ["codeAgent", "count"];
   const readUploadFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    setLoad(true);
     try {
       const files = e.target.files;
       if (!files || files.length === 0) {

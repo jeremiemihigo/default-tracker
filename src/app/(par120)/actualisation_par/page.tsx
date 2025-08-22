@@ -2,7 +2,6 @@
 import HeaderComponent from "@/app/header/Header";
 import { IShowDataPar } from "@/app/interface/par120";
 import Excel from "@/app/Tools/Excel";
-import Loading from "@/app/Tools/loading";
 import Popup from "@/app/Tools/Popup";
 import Tableau_set_Header from "@/app/Tools/Tab_set_Header";
 import { Button } from "@/components/ui/button";
@@ -48,7 +47,6 @@ function Fraude_verification() {
       }
     }
   }, [value]); // <-- dépendance
-
   useEffect(() => {
     const initialize = async () => {
       await LoadingData();
@@ -110,20 +108,14 @@ function Fraude_verification() {
   ];
   return (
     <HeaderComponent title="Refresh column PAR to track">
-      {isLoading ? (
-        <Loading type="Loading" />
-      ) : (
-        <>
-          <Excel data={data} title="Export" filename="PAR 120" />
-          <Uploading load={isLoading} setLoad={setIsLoading} />
-          <Tableau_set_Header
-            data={data}
-            columns={[...columns, ...columns1]}
-            customer_id="Name"
-            datafilter={datafilter}
-          />
-        </>
-      )}
+      <Excel data={data} title="Export" filename="PAR 120" />
+      <Uploading load={isLoading} setLoad={setIsLoading} />
+      <Tableau_set_Header
+        data={data}
+        columns={[...columns, ...columns1]}
+        customer_id="Name"
+        datafilter={datafilter}
+      />
     </HeaderComponent>
   );
 }
