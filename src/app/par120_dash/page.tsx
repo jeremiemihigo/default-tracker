@@ -34,13 +34,7 @@ function PagePar120Dash() {
     };
     initialze();
   }, []);
-  const returnClasse = (number: number) => {
-    if (number === 0) {
-      return "bg-blue-900 text-blue-900";
-    } else {
-      return "border border-gray-300";
-    }
-  };
+
   const [colonnesShow, setColonnesShow] = React.useState<string[]>([
     "1",
     "2",
@@ -354,32 +348,16 @@ function PagePar120Dash() {
                   )}
                   {colonnesShow.includes("3") && (
                     <>
-                      <td
-                        className={` px-2 py-1 ${returnClasse(
-                          item.action_hier
-                        )} `}
-                      >
+                      <td className="px-2 py-1 border border-gray-300">
                         {item.action_hier}
                       </td>
-                      <td
-                        className={` px-2 py-1 ${returnClasse(
-                          item.action_hier_visited
-                        )} `}
-                      >
+                      <td className="px-2 py-1 border border-gray-300">
                         {item.action_hier_visited}
                       </td>
-                      <td
-                        className={` px-2 py-1  ${returnClasse(
-                          item.all_visite_hier
-                        )} `}
-                      >
+                      <td className="px-2 py-1 border border-gray-300">
                         {item.all_visite_hier}
                       </td>
-                      <td
-                        className={` px-2 py-1 ${returnClasse(
-                          item.hier_par120
-                        )}`}
-                      >
+                      <td className="px-2 py-1 border border-gray-300">
                         {item.hier_par120}
                       </td>
                     </>
