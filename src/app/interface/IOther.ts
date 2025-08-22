@@ -62,6 +62,12 @@ export interface IPar120 {
   current_customer_status: string;
   daily_rate: number;
 }
+export interface IPar120Refresh {
+  customer_id: string;
+
+  current_payment_status: string;
+  current_customer_status: string;
+}
 export interface IRapportPar120 {
   name: string;
   fonction: string;

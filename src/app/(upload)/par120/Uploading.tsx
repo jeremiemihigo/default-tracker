@@ -1,4 +1,4 @@
-import { IPar120 } from "@/app/interface/IOther";
+import { IPar120, IPar120Refresh } from "@/app/interface/IOther";
 import { Combobox } from "@/app/Tools/combobox";
 import Excel from "@/app/Tools/Excel";
 import Popup from "@/app/Tools/Popup";
@@ -14,7 +14,7 @@ const liens = [
 ];
 
 function UploadingPar120() {
-  const [data, setData] = React.useState<IPar120[]>([]);
+  const [data, setData] = React.useState<IPar120[] | IPar120Refresh[]>([]);
   const [sending, setSending] = React.useState<boolean>(false);
   const [lien, setLien] = React.useState<string>("");
   const column = [
@@ -27,6 +27,11 @@ function UploadingPar120() {
     "current_customer_status",
     "daily_rate",
     "par",
+  ];
+  const columnRefresh = [
+    "customer_id", //Upload
+    "current_payment_status",
+    "current_customer_status",
   ];
   const readUploadFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -52,13 +57,20 @@ function UploadingPar120() {
           return;
         }
         const colonnes = Object.keys(json[0]);
-        const notexist = column.filter((x) => !colonnes.includes(x));
+        const notexist_add = column.filter((x) => !colonnes.includes(x));
+        const notexist_refresh = columnRefresh.filter(
+          (x) => !colonnes.includes(x)
+        );
 
-        if (notexist.length > 0) {
-          toast("Colonnes manquantes: " + notexist.join(", "));
+        if (
+          (lien === "refreshStatus" && notexist_refresh.length > 0) ||
+          (lien === "uploadFilepar120" && notexist_add.length > 0)
+        ) {
+          const colonnesmanquant =
+            lien === "refreshStatus" ? notexist_refresh : notexist_add;
+          toast("Colonnes manquantes: " + colonnesmanquant.join(", "));
           return;
         }
-
         setData(json);
       } catch (err) {
         toast("Erreur: " + (err as Error).message);
@@ -85,6 +97,13 @@ function UploadingPar120() {
       current_payment_status: "",
       current_customer_status: "",
       daily_rate: "",
+    },
+  ];
+  const templateRefresh = [
+    {
+      customer_id: "", //Upload
+      current_payment_status: "",
+      current_customer_status: "",
     },
   ];
   const sendData = async (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -123,13 +142,15 @@ function UploadingPar120() {
             <div>
               <Combobox data={liens} value={lien} setValue={setLien} />
             </div>
-            <Input
-              accept=".xlsx"
-              onChange={(e) => readUploadFile(e)}
-              id="filecustomer"
-              name="filecustomer"
-              type="file"
-            />
+            {lien !== "" && (
+              <Input
+                accept=".xlsx"
+                onChange={(e) => readUploadFile(e)}
+                id="filecustomer"
+                name="filecustomer"
+                type="file"
+              />
+            )}
 
             <div className="flex gap-2">
               <Button disabled={sending} onClick={(event) => sendData(event)}>
@@ -140,6 +161,11 @@ function UploadingPar120() {
                 data={template}
                 filename="Template PAR 120+"
                 title="Download template"
+              />
+              <Excel
+                data={templateRefresh}
+                filename="Refresh status"
+                title="Download template Refresh status"
               />
             </div>
           </>
