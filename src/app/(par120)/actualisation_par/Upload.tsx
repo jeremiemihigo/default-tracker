@@ -75,6 +75,7 @@ function Uploading({ load, setLoad }: Props) {
       count: "",
     },
   ];
+  console.log(donnerupload);
   const sendData = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setLoad(true);
@@ -88,6 +89,8 @@ function Uploading({ load, setLoad }: Props) {
       });
       const res = await response.json();
       if (res.status === 200) {
+        toast("Opération effectuée");
+        window.location.replace("/actualisation_par");
         setLoad(false);
       } else {
         toast(res.data);
