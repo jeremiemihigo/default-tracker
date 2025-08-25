@@ -1,9 +1,11 @@
 import { IPar120, IPar120Refresh } from "@/app/interface/IOther";
+import { lien_dt } from "@/app/static/lien";
 import { Combobox } from "@/app/Tools/combobox";
 import Excel from "@/app/Tools/Excel";
 import Popup from "@/app/Tools/Popup";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import axios from "axios";
 import React from "react";
 import { toast } from "sonner";
 import * as xlsx from "xlsx";
@@ -42,7 +44,6 @@ function UploadingPar120() {
       setSending(false);
       return;
     }
-
     const reader = new FileReader();
     reader.onload = (ev: ProgressEvent<FileReader>) => {
       try {
@@ -110,18 +111,20 @@ function UploadingPar120() {
     event.preventDefault();
     setSending(true);
     try {
-      const response = await fetch("/api/par120", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ data, lien }),
-      });
-      const res = await response.json();
-      if (res.status === 200) {
+      const response = await axios.post(
+        `${lien_dt}/${lien}`,
+        { data },
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (response.status === 200) {
         window.location.replace("/par120");
       } else {
-        toast(res.data);
+        toast(response.data);
         setSending(false);
       }
     } catch (error: unknown) {
