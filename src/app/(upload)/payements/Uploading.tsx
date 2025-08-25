@@ -1,5 +1,6 @@
 import { IPayement } from "@/app/interface/IOther";
 import { excelSerialToJSDate } from "@/app/static/functions";
+import { lien_dt } from "@/app/static/lien";
 import Excel from "@/app/Tools/Excel";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -96,12 +97,12 @@ function UploadingPayment({ load, setLoad, data }: Props) {
     event.preventDefault();
     setLoad(true);
     try {
-      const response = await fetch("/api/payement", {
+      const response = await fetch(`${lien_dt}/addpayements`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(donner),
+        body: JSON.stringify({ data: donner }),
       });
       const res = await response.json();
       if (res.status === 200) {
@@ -111,6 +112,7 @@ function UploadingPayment({ load, setLoad, data }: Props) {
         setLoad(false);
       }
     } catch (error: unknown) {
+      console.log(error);
       if (error instanceof Error) {
         toast(error.message);
       } else {
