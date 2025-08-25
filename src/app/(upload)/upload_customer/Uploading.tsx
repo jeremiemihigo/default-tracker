@@ -4,7 +4,6 @@ import Excel from "@/app/Tools/Excel";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
-import { cookies } from "next/headers";
 import React from "react";
 import { toast } from "sonner";
 import * as xlsx from "xlsx";
@@ -85,7 +84,6 @@ function UploadingCustomer() {
   const sendData = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setSending(true);
-    const token = (await cookies()).get("access")?.value;
     try {
       const res = await axios.post(
         `${lien_dt}/upload_customer`,
@@ -93,7 +91,6 @@ function UploadingCustomer() {
         {
           headers: {
             "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
           },
           maxBodyLength: Infinity, // important pour axios
           maxContentLength: Infinity,
