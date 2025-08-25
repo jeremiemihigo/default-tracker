@@ -7,7 +7,7 @@ export async function POST(request: NextRequest) {
   const data = await request.json();
 
   async function sendInBatches(data: IPayement[]) {
-    const batchSize = 1000; // ajuste selon ton besoin
+    const batchSize = 500; // ajuste selon ton besoin
     for (let i = 0; i < data.length; i += batchSize) {
       const chunk = data.slice(i, i + batchSize);
       const res = await fetch(`${lien_dt}/addpayements`, {
@@ -23,7 +23,6 @@ export async function POST(request: NextRequest) {
     return "done";
   }
   const result = sendInBatches(data);
-  console.log(result);
   const response = NextResponse.json({
     data: result,
     status: 200,
