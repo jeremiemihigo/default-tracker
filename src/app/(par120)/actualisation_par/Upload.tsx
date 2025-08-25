@@ -63,7 +63,6 @@ function Uploading({ load, setLoad }: Props) {
 
       reader.readAsArrayBuffer(files[0]);
     } catch (error) {
-      console.log(error);
       alert("Error " + (error as Error).message);
       setLoad(false);
     }
@@ -75,7 +74,6 @@ function Uploading({ load, setLoad }: Props) {
       count: "",
     },
   ];
-  console.log(donnerupload);
   const sendData = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setLoad(true);
@@ -104,7 +102,6 @@ function Uploading({ load, setLoad }: Props) {
       }
     }
   };
-  console.log(donnerupload);
   return (
     <div className="flex w-full items-center gap-3">
       <Input
