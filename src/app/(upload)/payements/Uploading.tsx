@@ -24,7 +24,6 @@ function UploadingPayment({ load, setLoad, data }: Props) {
   ];
   const readUploadFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-
     try {
       const files = e.target.files;
       if (!files || files.length === 0) {
@@ -96,6 +95,7 @@ function UploadingPayment({ load, setLoad, data }: Props) {
   ];
   const sendData = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
+    // Get token from localStorage or cookies on client side
     setLoad(true);
     try {
       const res = await axios.post(

@@ -1,7 +1,10 @@
 import { IUploadClient } from "@/app/interface/IOther";
+import { lien_dt } from "@/app/static/lien";
 import Excel from "@/app/Tools/Excel";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import axios from "axios";
+import { cookies } from "next/headers";
 import React from "react";
 import { toast } from "sonner";
 import * as xlsx from "xlsx";
@@ -82,15 +85,20 @@ function UploadingCustomer() {
   const sendData = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setSending(true);
+    const token = (await cookies()).get("access")?.value;
     try {
-      const response = await fetch("/api/allclient", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(data),
-      });
-      const res = await response.json();
+      const res = await axios.post(
+        `${lien_dt}/upload_customer`,
+        { data },
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          maxBodyLength: Infinity, // important pour axios
+          maxContentLength: Infinity,
+        }
+      );
       if (res.status === 200) {
         window.location.replace("/upload_customer");
       } else {
