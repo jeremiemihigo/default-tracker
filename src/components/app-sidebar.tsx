@@ -131,6 +131,10 @@ const data = {
           title: "Upload PAR 120+",
           url: "/par120",
         },
+        {
+          title: "Obj PAR 120+",
+          url: "/actualisation_par",
+        },
       ],
     },
   ],
@@ -147,10 +151,6 @@ const data = {
         {
           title: "Report PAR 120+",
           url: "/par120_dash",
-        },
-        {
-          title: "Obj PAR 120+",
-          url: "/actualisation_par",
         },
       ],
     },
