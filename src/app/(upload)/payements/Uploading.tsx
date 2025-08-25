@@ -4,6 +4,7 @@ import { lien_dt } from "@/app/static/lien";
 import Excel from "@/app/Tools/Excel";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import axios from "axios";
 import React from "react";
 import { toast } from "sonner";
 import * as xlsx from "xlsx";
@@ -97,14 +98,18 @@ function UploadingPayment({ load, setLoad, data }: Props) {
     event.preventDefault();
     setLoad(true);
     try {
-      const response = await fetch(`${lien_dt}/addpayements`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ data: donner }),
-      });
-      const res = await response.json();
+      const res = await axios.post(
+        `${lien_dt}/addpayements`,
+        { data: donner },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          maxBodyLength: Infinity, // important pour axios
+          maxContentLength: Infinity,
+        }
+      );
+
       if (res.status === 200) {
         window.location.replace("/payements");
       } else {
@@ -112,7 +117,6 @@ function UploadingPayment({ load, setLoad, data }: Props) {
         setLoad(false);
       }
     } catch (error: unknown) {
-      console.log(error);
       if (error instanceof Error) {
         toast(error.message);
       } else {
