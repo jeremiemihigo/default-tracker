@@ -5,7 +5,6 @@ export async function GET() {
     message: "Déconnexion réussie",
     status: 200,
   });
-
   // Supprimer le cookie "access" en le réécrivant avec expiration dans le passé
   response.cookies.set({
     name: "access",

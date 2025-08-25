@@ -72,7 +72,7 @@ function Uploading({ load, setLoad }: Props) {
   const template = [
     {
       codeAgent: "",
-      Obj_PAR120: "",
+      count: "",
     },
   ];
   const sendData = async (event: React.MouseEvent<HTMLButtonElement>) => {
