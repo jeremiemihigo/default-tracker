@@ -22,7 +22,6 @@ const datafilter = [
 
 function Fraude_verification() {
   const [data, setData] = useState<IShowDataPar[]>([]);
-  const [value, setValue] = useState<string>("");
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const LoadingData = useCallback(async () => {
@@ -46,7 +45,7 @@ function Fraude_verification() {
         console.log("An unknown error occurred", error);
       }
     }
-  }, [value]); // <-- dépendance
+  }, []); // <-- dépendance
   useEffect(() => {
     const initialize = async () => {
       await LoadingData();

@@ -31,6 +31,10 @@ export interface ITableauPar {
   label: string;
   data: number[];
 }
+interface IJ {
+  date_action: number;
+  nombre: number;
+}
 export interface IDonner {
   validationFraude: number;
   validationField: number;
@@ -39,8 +43,9 @@ export interface IDonner {
   vmfield: number;
   vmpo: number;
   refresh: number;
+  dashjournalier: IJ[];
   act_decisions: ShopRegion[];
-  regions: string[];
+  regions: [];
   tableau_pars: ITableauPar[];
 }
 export interface ISidebar {

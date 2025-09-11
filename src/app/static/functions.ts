@@ -35,3 +35,15 @@ export function capitalize(str: string) {
     return str;
   }
 }
+export const fonctionvm = [
+  { label: "Technicien (TECH)", value: "tech" },
+  { label: "Agent (SA)", value: "agent" },
+  { label: "Zonal_Business_Manager", value: "ZBM" },
+  { label: "Process_Officer", value: "PO" },
+  { label: "RS", value: "RS" },
+  { label: "Shop_Manager", value: "SM" },
+  { label: "Team_leader", value: "TL" },
+  { label: "Stagiaire", value: "stagiaire" },
+  { label: "Agent_de_recouvrement_(AR)", value: "AR" },
+  { label: "Shop_Assistante", value: "shop_assistante" },
+];

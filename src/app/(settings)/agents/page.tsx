@@ -1,11 +1,14 @@
 "use client";
 import HeaderComponent from "@/app/header/Header";
 import { IAgent } from "@/app/interface/settings/IAgent";
+import Loading from "@/app/Tools/loading";
+import Popup from "@/app/Tools/Popup";
 import Tableau_set_Header from "@/app/Tools/Tab_set_Header";
 import { Button } from "@/components/ui/button";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import React from "react";
+import Formulaire from "./Formulaire";
 
 const datafilter = [
   { label: "Name", value: "Name" },
@@ -20,6 +23,7 @@ const datafilter = [
 
 function Agents() {
   const [donner, setData] = React.useState<IAgent[]>([]);
+  const [load, setLoad] = React.useState<boolean>(true);
   const loadingData = async () => {
     const response = await fetch("/api/settings/agents", {
       method: "GET",
@@ -34,7 +38,11 @@ function Agents() {
   };
 
   React.useEffect(() => {
-    loadingData();
+    const initialize = async () => {
+      await loadingData();
+      setLoad(false);
+    };
+    initialize();
   }, []);
   const keyColonnes = [
     { title: "Name", accessorKey: "Name" },
@@ -91,7 +99,18 @@ function Agents() {
       },
       cell: ({ row }) => (
         <div className="gap-1 flex">
-          <Button>Edit</Button>
+          <Popup
+            title="Edit Account"
+            component={
+              <Formulaire
+                edit={row.original}
+                donner={donner}
+                setDonner={setData}
+              />
+            }
+            btnname="Edit"
+          />
+
           <Button variant="destructive">Bloquer</Button>
           <Button>Reset</Button>
         </div>
@@ -100,12 +119,23 @@ function Agents() {
   ];
   return (
     <HeaderComponent title="Agents">
-      <Tableau_set_Header
-        data={donner}
-        columns={[...columns1, ...columns_option]}
-        customer_id="ID"
-        datafilter={datafilter}
-      />
+      {load ? (
+        <Loading type="Loading" />
+      ) : (
+        <Tableau_set_Header
+          data={donner}
+          columns={[...columns1, ...columns_option]}
+          customer_id="ID"
+          datafilter={datafilter}
+          childrentop={
+            <Popup
+              title="Agent"
+              component={<Formulaire donner={donner} setDonner={setData} />}
+              btnname="Ajoutez un agent"
+            />
+          }
+        />
+      )}
     </HeaderComponent>
   );
 }

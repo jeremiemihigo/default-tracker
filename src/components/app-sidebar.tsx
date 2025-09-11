@@ -7,6 +7,8 @@ import {
   LayoutDashboard,
   Target,
   Upload,
+  UploadCloud,
+  Users,
 } from "lucide-react";
 import * as React from "react";
 
@@ -162,6 +164,19 @@ const data = {
       icon: HistoryIcon,
     },
   ],
+  accountManager: [
+    {
+      name: "Customers",
+      url: "/account_manager_customer",
+      icon: Users,
+    },
+
+    {
+      name: "Upload",
+      url: "/account_manager_upload",
+      icon: UploadCloud,
+    },
+  ],
 };
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
@@ -171,6 +186,22 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <TeamSwitcher />
       </SidebarHeader>
       <SidebarContent>
+        {/* <Accordion type="single" collapsible className="w-full">
+          <AccordionItem value="item-1">
+            <AccordionTrigger className="pl-3">
+              Default tracker
+            </AccordionTrigger>
+            <AccordionContent className="flex flex-col gap-4 text-balance"></AccordionContent>
+          </AccordionItem>
+          <AccordionItem value="item-2">
+            <AccordionTrigger className="pl-3">
+              Account Manager
+            </AccordionTrigger>
+            <AccordionContent className="flex flex-col gap-4 text-balance">
+              <NavProjects projects={data.accountManager} />
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion> */}
         <NavProjects projects={data.projects} />
         <NavMain items={data.navMain} />
         <NavMain items={data.navpar120} />

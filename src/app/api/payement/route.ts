@@ -3,7 +3,6 @@ import { lien_dt } from "@/app/static/lien";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: NextRequest) {
-  const token = request.cookies.get("access")?.value;
   const data = await request.json();
 
   async function sendInBatches(data: IPayement[]) {

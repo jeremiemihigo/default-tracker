@@ -21,6 +21,7 @@ function Payements() {
       const response = await result.json();
       setData(response.data);
     } catch (error) {
+      console.log(error);
       setLoad(false);
     }
   };

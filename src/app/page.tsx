@@ -3,9 +3,10 @@
 import HeaderComponent from "@/app/header/Header";
 import { IDonner } from "@/app/interface/IOther";
 import Loading from "@/app/Tools/loading";
-import _ from "lodash";
+import { ChartAreaInteractive } from "@/components/chart-area-interactive";
+import { DataTable } from "@/components/data-table";
+import { SectionCards } from "@/components/section-cards";
 import React from "react";
-import LineChart from "./Dashboard";
 
 function MainPage() {
   const [data, setData] = React.useState<IDonner>();
@@ -35,133 +36,68 @@ function MainPage() {
     initialize();
   }, []);
 
+  const field = [
+    {
+      title: "Validation",
+      value: data ? data?.validationField : 0,
+      description:
+        "Toutes les actions déjà validées par le département Field du début du mois à date",
+    },
+    {
+      title: "Awaiting verification",
+      value: data ? data.awaiting_fields : 0,
+      description:
+        "Toutes les actions qui sont en attente de vérification au département Field",
+    },
+    {
+      title: "Household visits",
+      value: data ? data.vmfield : 0,
+      description:
+        "Toutes les visites déjà effectuées par le département Field",
+    },
+  ];
+  const fraude = [
+    {
+      title: "Validation",
+      value: data ? data?.validationFraude : 0,
+      description:
+        "Toutes les actions déjà validées par le département de la fraude du début du mois à date",
+    },
+    {
+      title: "Awaiting verification",
+      value: data ? data?.awaiting_fraudes : 0,
+      description:
+        "Toutes les actions qui sont en attente de vérification au département de la fraude",
+    },
+    {
+      title: "Household visits",
+      value: data ? data.vmpo : 0,
+      description:
+        "Toutes les visites déjà effectuées par le département de la fraude",
+    },
+  ];
+
   return (
     <HeaderComponent title="Dashboard">
       {load && !data ? (
         <Loading type="Loading" />
       ) : (
-        <div className="flex flex-col gap-6 p-4">
-          {/* Table responsive */}
-
-          {/* Grille responsive des sections */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {/* Fraud management */}
-            <table className="w-full text-left border-collapse">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Action</th>
-                  <th>Decision</th>
-                </tr>
-              </thead>
-              {data && (
-                <tbody>
-                  {data?.regions.map((region, key) => (
-                    <React.Fragment key={key}>
-                      <tr className=" font-semibold bg-gray-400">
-                        <td>{region}</td>
-                        <td>
-                          {_.sumBy(
-                            data.act_decisions.filter(
-                              (x) => x.region === region
-                            ),
-                            "action"
-                          )}
-                        </td>
-                        <td>
-                          {_.sumBy(
-                            data.act_decisions.filter(
-                              (x) => x.region === region
-                            ),
-                            "decision"
-                          )}
-                        </td>
-                      </tr>
-                      {data.act_decisions
-                        .filter((x) => x.region === region)
-                        .map((shop, cle) => (
-                          <tr key={cle}>
-                            <td>{shop.shop}</td>
-                            <td>{shop.action}</td>
-                            <td>{shop.decision}</td>
-                          </tr>
-                        ))}
-                    </React.Fragment>
-                  ))}
-
-                  <tr>
-                    <td>Total</td>
-                    <td>{_.sumBy(data.act_decisions, "action")}</td>
-                    <td>{_.sumBy(data.act_decisions, "decision")}</td>
-                  </tr>
-                </tbody>
-              )}
-            </table>
-            <div className="border rounded-xl p-4 shadow-sm ">
-              <p className="text-lg font-semibold mb-2 text-center">
-                Fraud Management
-              </p>
-              <div>
-                <p className="text-sm text-gray-600 text-center">Validation</p>
-                <p className="text-3xl font-bold text-center">
-                  {data?.validationFraude}
-                </p>
+        <>
+          <div className="flex flex-1 flex-col">
+            <div className="@container/main flex flex-1 flex-col gap-2">
+              <div className="flex flex-col gap-4 py-4 md:gap-6 md:py-6">
+                <SectionCards data={field} refresh={data ? data.refresh : 0} />
+                <SectionCards data={fraude} />
+                <div className="px-4 lg:px-6">
+                  {data && (
+                    <ChartAreaInteractive chartData={data.dashjournalier} />
+                  )}
+                </div>
+                {data && <DataTable data={data?.regions} />}
               </div>
-              <div className="mt-4">
-                <p className="text-sm text-gray-600 text-center">
-                  Awaiting verification
-                </p>
-                <p className="text-3xl font-bold text-center">
-                  {data?.awaiting_fraudes}
-                </p>
-              </div>
-              <div className="mt-4">
-                <p className="text-sm text-gray-600 text-center">
-                  Household visits
-                </p>
-                <p className="text-3xl font-bold text-center">{data?.vmpo}</p>
-              </div>
-            </div>
-
-            {/* Field management */}
-            <div className="border rounded-xl p-4 shadow-sm ">
-              <p className="text-lg font-semibold mb-2 text-center">
-                Field Management
-              </p>
-              <div>
-                <p className="text-sm text-gray-600 text-center">Validation</p>
-                <p className="text-3xl font-bold text-center">
-                  {data?.validationField}
-                </p>
-              </div>
-              <div className="mt-4">
-                <p className="text-sm text-gray-600 text-center">
-                  Awaiting verification
-                </p>
-                <p className="text-3xl font-bold text-center">
-                  {data?.awaiting_fields}
-                </p>
-              </div>
-              <div className="mt-4">
-                <p className="text-sm text-gray-600 text-center ">
-                  Household visits
-                </p>
-                <p className="text-3xl font-bold text-center">
-                  {data?.vmfield}
-                </p>
-              </div>
-            </div>
-
-            {/* Feedback */}
-            <div className="border rounded-xl p-4 shadow-sm  col-span-1 sm:col-span-2 lg:col-span-1 flex flex-col justify-center items-center">
-              <p className="text-lg font-semibold mb-2">Feedback to Refresh</p>
-              <p className="text-4xl font-bold">{data?.refresh}</p>
             </div>
           </div>
-          {data && data.tableau_pars.length > 0 && (
-            <LineChart donner={data?.tableau_pars} />
-          )}
-        </div>
+        </>
       )}
     </HeaderComponent>
   );

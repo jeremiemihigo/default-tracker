@@ -39,12 +39,14 @@ type Props<TData extends object> = {
   columns: ColumnDef<TData>[];
   customer_id: string;
   datafilter?: ICombo[];
+  childrentop?: React.ReactNode;
 };
 export default function Tableau_set_Header<TData extends object>({
   data,
   columns,
   customer_id,
   datafilter,
+  childrentop,
 }: Props<TData>) {
   const [sorting, setSorting] = React.useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -103,6 +105,7 @@ export default function Tableau_set_Header<TData extends object>({
           }
           className="max-w-sm mr-2"
         />
+
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline">
@@ -129,6 +132,7 @@ export default function Tableau_set_Header<TData extends object>({
               })}
           </DropdownMenuContent>
         </DropdownMenu>
+        {childrentop}
       </div>
       <div className="overflow-hidden rounded-md border h-screen">
         <Table>
