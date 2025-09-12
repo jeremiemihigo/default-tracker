@@ -28,7 +28,7 @@ export default function Popup({
         <DialogTrigger asChild>
           <Button variant="default">{btnname}</Button>
         </DialogTrigger>
-        <DialogContent className="sm:max-w-[425px]">
+        <DialogContent aria-describedby="" className="sm:max-w-[425px]">
           <DialogHeader>
             <DialogTitle>{title}</DialogTitle>
             {description && (

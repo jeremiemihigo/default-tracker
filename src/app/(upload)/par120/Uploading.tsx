@@ -1,3 +1,4 @@
+"use client";
 import { IPar120, IPar120Refresh } from "@/app/interface/IOther";
 import { lien_dt } from "@/app/static/lien";
 import { Combobox } from "@/app/Tools/combobox";
@@ -18,7 +19,8 @@ const liens = [
 function UploadingPar120() {
   const [data, setData] = React.useState<IPar120[] | IPar120Refresh[]>([]);
   const [sending, setSending] = React.useState<boolean>(false);
-  const [lien, setLien] = React.useState<string>("");
+  const [lien, setLien] = React.useState<string>("refreshStatus");
+
   const column = [
     "customer_id", //Upload
     "customer_name", //Upload
@@ -146,17 +148,14 @@ function UploadingPar120() {
               <Combobox data={liens} value={lien} setValue={setLien} />
             </div>
             <div className="mt-3">
-              {lien !== "" && (
-                <Input
-                  accept=".xlsx"
-                  onChange={(e) => readUploadFile(e)}
-                  id="filecustomer"
-                  name="filecustomer"
-                  type="file"
-                />
-              )}
+              <Input
+                accept=".xlsx"
+                onChange={(e) => readUploadFile(e)}
+                id="filecustomer"
+                name="filecustomer"
+                type="file"
+              />
             </div>
-
             <div className="mt-2">
               <Button
                 className="w-full"

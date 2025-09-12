@@ -48,7 +48,7 @@ export function Combobox({ value, data, setValue }: Props) {
         <Command>
           <CommandInput placeholder="Search one..." className="h-9" />
           <CommandList>
-            <CommandEmpty>No framework found.</CommandEmpty>
+            <CommandEmpty>No data found.</CommandEmpty>
             <CommandGroup>
               {data.map((framework) => (
                 <CommandItem
