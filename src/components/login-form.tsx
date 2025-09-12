@@ -32,9 +32,11 @@ export function LoginForm({
   const [message, setMessage] = React.useState<string>("");
 
   const router = useRouter();
+  const [sending, setSending] = React.useState<boolean>(false);
 
   const submitLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setSending(true);
     try {
       const res = await fetch("/api/login", {
         method: "POST",
@@ -44,7 +46,6 @@ export function LoginForm({
         body: JSON.stringify(values),
       });
       const data = await res.json();
-
       if (data.message === "success") {
         router.push("/");
       } else {
@@ -56,6 +57,8 @@ export function LoginForm({
       } else {
         setMessage("An unknown error occurred");
       }
+    } finally {
+      setSending(false);
     }
   };
 
@@ -96,8 +99,8 @@ export function LoginForm({
           />
         </div>
 
-        <Button type="submit" className="w-full">
-          Login
+        <Button type="submit" className="w-full" disabled={sending}>
+          {sending ? "Please wait..." : "Login"}
         </Button>
         {message && <AlerteError title={message} />}
       </div>
