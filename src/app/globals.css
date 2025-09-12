@@ -155,6 +155,15 @@
   color: white;
   font-weight: bolder;
 }
+.optionselect {
+  background-color: #002d72;
+  color: "white" !important;
+  border-radius: 5px;
+}
+.optionnotselect {
+  background: "white";
+  color: "black";
+}
 .first_div {
   display: flex;
   align-items: center;

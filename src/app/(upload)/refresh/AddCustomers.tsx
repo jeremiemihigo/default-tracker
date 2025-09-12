@@ -1,9 +1,7 @@
 "use client";
 import { IPar120, IPar120Refresh } from "@/app/interface/IOther";
 import { lien_dt } from "@/app/static/lien";
-import { Combobox } from "@/app/Tools/combobox";
 import Excel from "@/app/Tools/Excel";
-import Popup from "@/app/Tools/Popup";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import axios from "axios";
@@ -11,15 +9,9 @@ import React from "react";
 import { toast } from "sonner";
 import * as xlsx from "xlsx";
 
-const liens = [
-  { value: "refreshStatus", label: "Refresh status" },
-  { value: "uploadFilepar120", label: "Add customers" },
-];
-
-function UploadingPar120() {
+function AddCustomer() {
   const [data, setData] = React.useState<IPar120[] | IPar120Refresh[]>([]);
   const [sending, setSending] = React.useState<boolean>(false);
-  const [lien, setLien] = React.useState<string>("refreshStatus");
 
   const column = [
     "customer_id", //Upload
@@ -32,11 +24,7 @@ function UploadingPar120() {
     "daily_rate",
     "par",
   ];
-  const columnRefresh = [
-    "customer_id", //Upload
-    "current_payment_status",
-    "current_customer_status",
-  ];
+
   const readUploadFile = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setSending(true);
@@ -60,18 +48,10 @@ function UploadingPar120() {
           return;
         }
         const colonnes = Object.keys(json[0]);
-        const notexist_add = column.filter((x) => !colonnes.includes(x));
-        const notexist_refresh = columnRefresh.filter(
-          (x) => !colonnes.includes(x)
-        );
+        const notexist_refresh = column.filter((x) => !colonnes.includes(x));
 
-        if (
-          (lien === "refreshStatus" && notexist_refresh.length > 0) ||
-          (lien === "uploadFilepar120" && notexist_add.length > 0)
-        ) {
-          const colonnesmanquant =
-            lien === "refreshStatus" ? notexist_refresh : notexist_add;
-          toast("Colonnes manquantes: " + colonnesmanquant.join(", "));
+        if (notexist_refresh.length > 0) {
+          toast("Colonnes manquantes: " + notexist_refresh.join(", "));
           return;
         }
         setData(json);
@@ -102,25 +82,17 @@ function UploadingPar120() {
       daily_rate: "",
     },
   ];
-  const templateRefresh = [
-    {
-      customer_id: "", //Upload
-      current_payment_status: "",
-      current_customer_status: "",
-    },
-  ];
+
   const sendData = async (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
     setSending(true);
     try {
       const response = await axios.post(
-        `${lien_dt}/${lien}`,
+        `${lien_dt}/uploadFilepar120`,
         { data },
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
         }
       );
       if (response.status === 200) {
@@ -139,48 +111,48 @@ function UploadingPar120() {
   };
 
   return (
-    <div className=" flex gap-3 mb-2 p-2">
-      <Popup
-        title="Upload or refresh customer"
-        component={
-          <div>
-            <div>
-              <Combobox data={liens} value={lien} setValue={setLien} />
-            </div>
-            <div className="mt-3">
-              <Input
-                accept=".xlsx"
-                onChange={(e) => readUploadFile(e)}
-                id="filecustomer"
-                name="filecustomer"
-                type="file"
-              />
-            </div>
-            <div className="mt-2">
-              <Button
-                className="w-full"
-                disabled={sending || data.length === 0 ? true : false}
-                onClick={(event) => sendData(event)}
-              >
-                {lien === "refreshStatus" ? "Refresh status" : "Submit"}
-              </Button>
-            </div>
-          </div>
-        }
-        btnname="Upload or refresh customer"
-      />
-      <Excel
-        data={template}
-        filename="Template PAR 120+"
-        title="Download template"
-      />
-      <Excel
-        data={templateRefresh}
-        filename="Refresh status"
-        title="Template Refresh"
-      />
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-50 p-6">
+      <div className="bg-white shadow-md rounded-2xl p-8 w-full max-w-lg text-center">
+        <h1 className="text-2xl font-semibold mb-6">
+          Upload new customers to track
+        </h1>
+
+        {/* Zone drag & drop */}
+        <label
+          htmlFor="filecustomer"
+          className="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-xl cursor-pointer p-8 hover:bg-gray-100 transition"
+        >
+          <p className="text-gray-600 mb-2">cliquez pour choisir le fichier</p>
+          <Input
+            accept=".xlsx"
+            onChange={(e) => readUploadFile(e)}
+            id="filecustomer"
+            name="filecustomer"
+            type="file"
+            className="hidden"
+          />
+        </label>
+
+        {/* Bouton */}
+        <Button
+          className="w-full mt-6"
+          disabled={sending || data.length === 0}
+          onClick={(event) => sendData(event)}
+        >
+          {sending ? "Envoi en cours..." : "Submit"}
+        </Button>
+
+        {/* Lien template */}
+        <div className="mt-4">
+          <Excel
+            data={template}
+            filename="Template PAR 120+"
+            title="Download template"
+          />
+        </div>
+      </div>
     </div>
   );
 }
 
-export default UploadingPar120;
+export default AddCustomer;

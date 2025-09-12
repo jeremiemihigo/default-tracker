@@ -8,7 +8,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 export function NavProjects({
   projects,
@@ -20,11 +20,17 @@ export function NavProjects({
   }[];
 }) {
   const router = useRouter();
+  const pathname = usePathname();
   return (
     <SidebarGroup className="group-data-[collapsible=icon]:hidden">
       <SidebarMenu>
         {projects.map((item) => (
-          <SidebarMenuItem key={item.name}>
+          <SidebarMenuItem
+            className={
+              pathname === item.url ? "optionselect" : "optionnotselect"
+            }
+            key={item.name}
+          >
             <SidebarMenuButton
               onClick={() => {
                 router.push(item.url);

@@ -18,6 +18,7 @@ import {
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React from "react";
 
 export function NavMain({
@@ -37,6 +38,7 @@ export function NavMain({
 }) {
   const [data, setData] = React.useState<ISidebar>();
   const [load, setLoad] = React.useState<boolean>(true);
+  const pathname = usePathname();
   const loadingData = async () => {
     try {
       setLoad(true);
@@ -84,7 +86,14 @@ export function NavMain({
               <CollapsibleContent>
                 <SidebarMenuSub>
                   {item.items?.map((subItem) => (
-                    <SidebarMenuSubItem key={subItem.title}>
+                    <SidebarMenuSubItem
+                      className={
+                        pathname === subItem.url
+                          ? "optionselect"
+                          : "optionnotselect"
+                      }
+                      key={subItem.title}
+                    >
                       <SidebarMenuSubButton asChild>
                         <Link
                           href={subItem.url}

@@ -131,7 +131,7 @@ const data = {
         },
         {
           title: "Upload PAR 120+",
-          url: "/par120",
+          url: "/refresh",
         },
         {
           title: "Obj PAR 120+",
