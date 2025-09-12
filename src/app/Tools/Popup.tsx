@@ -23,21 +23,17 @@ export default function Popup({
   btnname,
 }: Props) {
   return (
-    <Dialog>
-      <form>
-        <DialogTrigger asChild>
-          <Button variant="default">{btnname}</Button>
-        </DialogTrigger>
-        <DialogContent aria-describedby="" className="sm:max-w-[425px]">
-          <DialogHeader>
-            <DialogTitle>{title}</DialogTitle>
-            {description && (
-              <DialogDescription>{description}</DialogDescription>
-            )}
-          </DialogHeader>
-          <div className="grid gap-4">{component}</div>
-        </DialogContent>
-      </form>
+    <Dialog modal={false}>
+      <DialogTrigger asChild>
+        <Button variant="default">{btnname}</Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>{title}</DialogTitle>
+          <DialogDescription>{description}</DialogDescription>
+        </DialogHeader>
+        <div>{component}</div>
+      </DialogContent>
     </Dialog>
   );
 }

@@ -53,7 +53,7 @@ export function Combobox({ value, data, setValue }: Props) {
               {data.map((framework) => (
                 <CommandItem
                   key={framework.value}
-                  value={framework.label}
+                  value={framework.value}
                   onSelect={() => {
                     setValue(framework.value);
                     setOpen(false);

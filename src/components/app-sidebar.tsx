@@ -51,10 +51,7 @@ const data = {
           title: "To be tracked by PO",
           url: "/fraude_verification",
         },
-        {
-          title: "To be tracked by agent",
-          url: "/track_by_agent",
-        },
+
         // {
         //   title: "Individually",
         //   url: "/individually",
