@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { cn } from "@/lib/utils";
+import { useRouter } from "next/navigation";
 
 import React from "react";
 
@@ -29,6 +30,9 @@ export function LoginForm({
     });
   };
   const [message, setMessage] = React.useState<string>("");
+
+  const router = useRouter();
+
   const submitLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -42,7 +46,7 @@ export function LoginForm({
       const data = await res.json();
 
       if (data.message === "success") {
-        window.location.replace("/");
+        router.push("/");
       } else {
         setMessage(data.message);
       }

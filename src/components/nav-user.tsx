@@ -29,10 +29,12 @@ import {
   useSidebar,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React from "react";
 import { toast } from "sonner";
 
 export function NavUser() {
+  const router = useRouter();
   const { isMobile } = useSidebar();
   const Deconnexion = async () => {
     const res = await fetch("/api/deconnexion", {
@@ -45,7 +47,7 @@ export function NavUser() {
     const response = await res.json();
     toast(response.message);
     if (response.status === 200) {
-      window.location.replace("/login");
+      router.push("/login");
     }
   };
 
