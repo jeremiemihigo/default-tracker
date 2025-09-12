@@ -14,7 +14,7 @@ export async function GET(request: NextRequest) {
   const data = await res.json();
   const response = NextResponse.json({
     data,
-    status: res.status,
+    status: 201,
   });
   return response;
 }

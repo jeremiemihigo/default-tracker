@@ -2,8 +2,9 @@
 import { AppSidebar } from "@/components/app-sidebar";
 import { ModeToggle } from "@/components/mode-toogle";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Alert, AlertTitle } from "@/components/ui/alert";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
-import { useRouter } from "next/navigation";
+import { AlertCircleIcon } from "lucide-react";
 import React from "react";
 
 type Props = {
@@ -12,9 +13,10 @@ type Props = {
 };
 
 function HeaderComponent({ children, title }: Props) {
-  const router = useRouter();
+  const [messageError, setMessageError] = React.useState<string>("");
   const loading = async () => {
     try {
+      setMessageError("");
       const response = await fetch("/api/categorisation", {
         method: "GET",
         headers: {
@@ -22,9 +24,7 @@ function HeaderComponent({ children, title }: Props) {
         },
       });
       const result = await response.json();
-      if (result.data !== "Done") {
-        router.push("/login");
-      }
+      setMessageError(JSON.stringify(result.data));
     } catch (error) {
       console.log(error);
     }
@@ -53,6 +53,14 @@ function HeaderComponent({ children, title }: Props) {
                   <ModeToggle />
                   <p>{title}</p>
                 </div>
+                {messageError && (
+                  <div style={{ marginLeft: "15px" }}>
+                    <Alert variant="destructive">
+                      <AlertCircleIcon />
+                      <AlertTitle>{messageError}</AlertTitle>
+                    </Alert>
+                  </div>
+                )}
               </nav>
 
               <div style={{ padding: "10px" }}>{children}</div>
