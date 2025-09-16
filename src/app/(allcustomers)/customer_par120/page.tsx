@@ -5,8 +5,32 @@ import { IDataRefresh } from "@/app/interface/IOther";
 import Excel from "@/app/Tools/Excel";
 import Loading from "@/app/Tools/loading";
 import Popup from "@/app/Tools/Popup";
+import Tableau_set_Header from "@/app/Tools/Tab_set_Header";
 import { Button } from "@/components/ui/button";
+import { ColumnDef } from "@tanstack/react-table";
+import { ArrowUpDown } from "lucide-react";
 import React from "react";
+
+const colonneFilter = [
+  { label: "Customer ID", value: "customer_id" },
+  { label: "Customer name", value: "customer_name" },
+  { label: "Shop name", value: "shop" },
+  { label: "Region name", value: "region" },
+
+  {
+    label: "Feedback",
+    value: "feedback",
+  },
+
+  {
+    label: "Staff Having Visited",
+    value: "staff_ayant_visite",
+  },
+  {
+    label: "statut_decision",
+    value: "statut_decision",
+  },
+];
 
 function TableauPayement() {
   const [data, setData] = React.useState<IDataRefresh[]>([]);
@@ -53,6 +77,132 @@ function TableauPayement() {
     }
   };
   console.log(data);
+  // "#",
+  //                   "Customer ID",
+  //                   "Customer Name",
+  //                   "Shop",
+  //                   "Par",
+  //                   "Payment Status",
+  //                   "Customer Status",
+  //                   "Observation",
+  //                   "Daily Rate",
+  //                   "Date Refresh",
+  //                   "Already Paid",
+  //                   "Feedback",
+  //                   "Performance",
+  //                   "Staff Having Visited",
+  const keyColonnes = [
+    { title: "Customer ID", accessorKey: "customer_id" },
+    { title: "Customer name", accessorKey: "customer_name" },
+    { title: "Shop name", accessorKey: "shop" },
+    { title: "Region name", accessorKey: "region" },
+
+    {
+      title: "Feedback",
+      accessorKey: "feedback",
+    },
+    {
+      title: "Track by",
+      accessorKey: "track_by",
+    },
+    {
+      title: "statut_decision",
+      accessorKey: "statut_decision",
+    },
+  ];
+  const columns1: ColumnDef<IDataRefresh>[] = keyColonnes.map((cle) => {
+    return {
+      accessorKey: cle.accessorKey,
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            {cle.title}
+            <ArrowUpDown />
+          </Button>
+        );
+      },
+      cell: ({ row }) => <>{row.getValue(cle.accessorKey)}</>,
+    };
+  });
+  const columns: ColumnDef<IDataRefresh>[] = [
+    {
+      id: "daily_rate",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Daily_rate
+            <ArrowUpDown />
+          </Button>
+        );
+      },
+      cell: ({ row }) => <>${row.original.daily_rate}</>,
+      enableSorting: false,
+      enableHiding: false,
+    },
+    {
+      id: "dejaPayer",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Already Paid
+            <ArrowUpDown />
+          </Button>
+        );
+      },
+      cell: ({ row }) => <>${row.original.dejaPayer}</>,
+      enableSorting: false,
+      enableHiding: false,
+    },
+    {
+      id: "performance",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Performance
+            <ArrowUpDown />
+          </Button>
+        );
+      },
+      cell: ({ row }) => (
+        <>
+          {row.original.performance !== "Not visited" ? (
+            <Popup
+              title="Decisions"
+              component={
+                <ChangeDecision
+                  data={{
+                    customer_id: row.original.customer_id,
+                    shop: row.original.shop,
+                    region: row.original.region,
+                    idHistorique: row.original._id,
+                    par: row.original.par,
+                    customer_name: row.original.customer_name,
+                  }}
+                />
+              }
+              btnname={row.original.performance}
+            />
+          ) : (
+            row.original.performance
+          )}
+        </>
+      ),
+      enableSorting: false,
+      enableHiding: false,
+    },
+  ];
 
   return (
     <HeaderComponent title="My Tracker PAR 120+">
@@ -65,130 +215,12 @@ function TableauPayement() {
           </div>
 
           <div className="overflow-x-auto rounded-lg shadow-lg">
-            <table className="min-w-full border border-gray-200 bg-white">
-              <thead className="bg-gray-100">
-                <tr>
-                  {[
-                    "#",
-                    "Customer ID",
-                    "Customer Name",
-                    "Shop",
-                    "Par",
-                    "Payment Status",
-                    "Customer Status",
-                    "Observation",
-                    "Daily Rate",
-                    "Date Refresh",
-                    "Already Paid",
-                    "Feedback",
-                    "Performance",
-                    "Staff Having Visited",
-                  ].map((header) => (
-                    <th
-                      key={header}
-                      className="px-4 py-2 text-left text-sm font-semibold text-gray-700 border-b border-gray-300"
-                    >
-                      {header}
-                    </th>
-                  ))}
-                </tr>
-              </thead>
-              <tbody>
-                {data.length === 0 ? (
-                  <tr>
-                    <td
-                      colSpan={15}
-                      className="px-4 py-4 text-center text-gray-500"
-                    >
-                      Aucun enregistrement trouvé.
-                    </td>
-                  </tr>
-                ) : (
-                  data.map((row, key) => (
-                    <tr
-                      key={row.customer_id}
-                      className="hover:bg-gray-50 transition-colors text-sm"
-                    >
-                      <td className="px-1 py-0.5 border-b">{key + 1}</td>
-                      <td className="px-1 py-0.5 border-b">
-                        {row.customer_id}
-                      </td>
-                      <td className="px-1 py-0.5 border-b text-sm">
-                        {row.customer_name}
-                      </td>
-                      <td className="px-1 py-0.5 border-b">{row.shop}</td>
-                      <td className="px-1 py-0.5 border-b">{row.par}</td>
-
-                      <td className="px-1 py-0.5 border-b grid">
-                        <p> {row.current__status.current_payment_status}</p>
-
-                        <p className="date_update">
-                          {new Date(
-                            row.current__status.date_update
-                          ).toLocaleDateString()}
-                        </p>
-                      </td>
-                      <td className="px-1 py-0.5 border-b">
-                        <p>{row.current__status.current_customer_status}</p>
-                        <p className="date_update">
-                          {new Date(
-                            row.current__status.date_update
-                          ).toLocaleDateString()}
-                        </p>
-                      </td>
-                      <td
-                        className={`px-1 py-0.5 border-b ${row.observation.toLowerCase()}`}
-                      >
-                        {row.observation}
-                      </td>
-                      <td className="px-1 py-0.5 border-b">
-                        {row.daily_rate.toFixed(1)}$
-                      </td>
-                      <td className="px-1 py-0.5 border-b">
-                        {new Date(row.date_refresh).toLocaleDateString()}
-                      </td>
-                      <td className="px-1 py-0.5 border-b">
-                        {row.dejaPayer && row.dejaPayer.toFixed(1)}$
-                      </td>
-                      <td className="px-1 py-0.5 border-b">
-                        {row.feedback && row.feedback?.length > 0
-                          ? row.feedback[0]?.title
-                          : row.feedback_staff}
-                      </td>
-                      <td className="px-1 py-0.5 border-b">
-                        {["Lui-meme", "Pas lui-meme"].includes(
-                          row.performance
-                        ) ? (
-                          <>
-                            <Popup
-                              title="Decisions"
-                              component={
-                                <ChangeDecision
-                                  data={{
-                                    customer_id: row.customer_id,
-                                    shop: row.shop,
-                                    region: row.region,
-                                    idHistorique: row._id,
-                                    par: row.par,
-                                    customer_name: row.customer_name,
-                                  }}
-                                />
-                              }
-                              btnname={row.performance}
-                            />
-                          </>
-                        ) : (
-                          row.performance
-                        )}
-                      </td>
-                      <td className="px-1 py-0.5 border-b">
-                        {row.staff_ayant_visite}
-                      </td>
-                    </tr>
-                  ))
-                )}
-              </tbody>
-            </table>
+            <Tableau_set_Header
+              data={data}
+              columns={[...columns1, ...columns]}
+              customer_id="customer_id"
+              datafilter={colonneFilter}
+            />
           </div>
         </>
       )}

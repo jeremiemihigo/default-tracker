@@ -1,3 +1,4 @@
+import { IDataRefresh } from "@/app/interface/IOther";
 import { lien_dt } from "@/app/static/lien";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -13,8 +14,17 @@ export async function GET(request: NextRequest) {
   });
   const data = await res.json();
   if (res.status === 200) {
+    const donner = data.map((index: IDataRefresh) => {
+      return {
+        ...index,
+        feedback:
+          index.feedback && index.feedback?.length > 0
+            ? index.feedback[0]?.title
+            : index.feedback_staff,
+      };
+    });
     const response = NextResponse.json({
-      data,
+      data: donner,
       status: res.status,
     });
     return response;

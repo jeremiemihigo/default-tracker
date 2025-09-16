@@ -103,19 +103,12 @@ export interface IDataRefresh {
   customer_name: string;
   shop: string;
   region: string;
-  tracker_par: string;
   par: string;
-  current__status: {
-    date_update: number;
-    current_payment_status: string;
-    current_customer_status: string;
-  };
   observation: "No_action" | "Repossession" | "Reactivation";
   daily_rate: number;
-  date_refresh: number;
   dejaPayer: number;
   feedback_staff: string;
   performance: string;
-  staff_ayant_visite: string;
+  track_by: string;
   feedback?: IFeedback[];
 }
