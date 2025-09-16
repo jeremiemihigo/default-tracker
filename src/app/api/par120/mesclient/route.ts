@@ -17,10 +17,12 @@ export async function GET(request: NextRequest) {
     const donner = data.map((index: IDataRefresh) => {
       return {
         ...index,
+
         feedback:
           index.feedback && index.feedback?.length > 0
             ? index.feedback[0]?.title
             : index.feedback_staff,
+        daily_rate: index.daily_rate.toFixed(2),
       };
     });
     const response = NextResponse.json({

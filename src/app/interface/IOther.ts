@@ -109,6 +109,6 @@ export interface IDataRefresh {
   dejaPayer: number;
   feedback_staff: string;
   performance: string;
-  track_by: string;
+  tracker_par: string;
   feedback?: IFeedback[];
 }

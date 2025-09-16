@@ -18,13 +18,8 @@ const colonneFilter = [
   { label: "Region name", value: "region" },
 
   {
-    label: "Feedback",
-    value: "feedback",
-  },
-
-  {
-    label: "Staff Having Visited",
-    value: "staff_ayant_visite",
+    label: "track_by",
+    value: "tracker_par",
   },
   {
     label: "statut_decision",
@@ -76,34 +71,14 @@ function TableauPayement() {
       console.log(error);
     }
   };
-  console.log(data);
-  // "#",
-  //                   "Customer ID",
-  //                   "Customer Name",
-  //                   "Shop",
-  //                   "Par",
-  //                   "Payment Status",
-  //                   "Customer Status",
-  //                   "Observation",
-  //                   "Daily Rate",
-  //                   "Date Refresh",
-  //                   "Already Paid",
-  //                   "Feedback",
-  //                   "Performance",
-  //                   "Staff Having Visited",
   const keyColonnes = [
     { title: "Customer ID", accessorKey: "customer_id" },
     { title: "Customer name", accessorKey: "customer_name" },
     { title: "Shop name", accessorKey: "shop" },
     { title: "Region name", accessorKey: "region" },
-
-    {
-      title: "Feedback",
-      accessorKey: "feedback",
-    },
     {
       title: "Track by",
-      accessorKey: "track_by",
+      accessorKey: "tracker_par",
     },
     {
       title: "statut_decision",
@@ -203,6 +178,23 @@ function TableauPayement() {
       enableHiding: false,
     },
   ];
+  const columns2: ColumnDef<IDataRefresh>[] = [
+    {
+      accessorKey: "feedback",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Feedback
+            <ArrowUpDown />
+          </Button>
+        );
+      },
+      cell: ({ row }) => <>{row.original.feedback}</>,
+    },
+  ];
 
   return (
     <HeaderComponent title="My Tracker PAR 120+">
@@ -217,9 +209,41 @@ function TableauPayement() {
           <div className="overflow-x-auto rounded-lg shadow-lg">
             <Tableau_set_Header
               data={data}
-              columns={[...columns1, ...columns]}
+              columns={[...columns1, ...columns, ...columns2]}
               customer_id="customer_id"
               datafilter={colonneFilter}
+              childrentop={
+                <>
+                  <div>
+                    <p className="text-sm text-gray-500 text-center">
+                      No action no visits
+                    </p>
+                    <p className="text-3xl font-bold text-red-600 text-center">
+                      {(
+                        (data.filter((x) => x.performance === "Not visited")
+                          .length /
+                          data.length) *
+                        100
+                      ).toFixed(0)}
+                      %
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500 text-center">
+                      No action visited
+                    </p>
+                    <p className="text-3xl font-bold text-red-600 text-center">
+                      {(
+                        (data.filter((x) => x.performance !== "Not visited")
+                          .length /
+                          data.length) *
+                        100
+                      ).toFixed(0)}
+                      %
+                    </p>
+                  </div>
+                </>
+              }
             />
           </div>
         </>
