@@ -1,5 +1,6 @@
 import { IDataRefresh } from "@/app/interface/IOther";
 import { lien_dt } from "@/app/static/lien";
+import moment from "moment";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
@@ -23,6 +24,7 @@ export async function GET(request: NextRequest) {
             ? index.feedback[0]?.title
             : index.feedback_staff,
         daily_rate: index.daily_rate.toFixed(2),
+        date_refresh: moment(index.date_refresh).format("DD-MM-YYYY"),
       };
     });
     const response = NextResponse.json({

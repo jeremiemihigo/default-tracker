@@ -104,11 +104,12 @@ export interface IDataRefresh {
   shop: string;
   region: string;
   par: string;
-  observation: "No_action" | "Repossession" | "Reactivation";
+  observation: "No_action" | "Repossession" | "Reactivation" | "Opt-out";
   daily_rate: number;
   dejaPayer: number;
   feedback_staff: string;
   performance: string;
+  date_refresh: string;
   tracker_par: string;
   feedback?: IFeedback[];
 }

@@ -16,14 +16,13 @@ const colonneFilter = [
   { label: "Customer name", value: "customer_name" },
   { label: "Shop name", value: "shop" },
   { label: "Region name", value: "region" },
-
   {
     label: "track_by",
     value: "tracker_par",
   },
   {
-    label: "statut_decision",
-    value: "statut_decision",
+    label: "Observation",
+    value: "observation",
   },
 ];
 
@@ -81,8 +80,8 @@ function TableauPayement() {
       accessorKey: "tracker_par",
     },
     {
-      title: "statut_decision",
-      accessorKey: "statut_decision",
+      title: "date_refresh",
+      accessorKey: "date_refresh",
     },
   ];
   const columns1: ColumnDef<IDataRefresh>[] = keyColonnes.map((cle) => {
@@ -103,6 +102,27 @@ function TableauPayement() {
     };
   });
   const columns: ColumnDef<IDataRefresh>[] = [
+    {
+      id: "Observation",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Observation
+            <ArrowUpDown />
+          </Button>
+        );
+      },
+      cell: ({ row }) => (
+        <div className={row.original.observation.toLocaleLowerCase()}>
+          {row.original.observation}
+        </div>
+      ),
+      enableSorting: false,
+      enableHiding: false,
+    },
     {
       id: "daily_rate",
       header: ({ column }) => {
@@ -222,19 +242,20 @@ function TableauPayement() {
                       {(
                         (data.filter((x) => x.performance === "Not visited")
                           .length /
-                          data.length) *
+                          data.filter((x) => x.observation === "No_action")
+                            .length) *
                         100
                       ).toFixed(0)}
                       %
                     </p>
                   </div>
-                  <div>
+                  <div className="pl-3">
                     <p className="text-sm text-gray-500 text-center">
-                      No action visited
+                      Pourcentage d&apos;actions
                     </p>
                     <p className="text-3xl font-bold text-red-600 text-center">
                       {(
-                        (data.filter((x) => x.performance !== "Not visited")
+                        (data.filter((x) => x.observation !== "No_action")
                           .length /
                           data.length) *
                         100
