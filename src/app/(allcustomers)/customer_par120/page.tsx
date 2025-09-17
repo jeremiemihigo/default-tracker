@@ -80,7 +80,7 @@ function TableauPayement() {
       accessorKey: "tracker_par",
     },
     {
-      title: "date_refresh",
+      title: "Update date",
       accessorKey: "date_refresh",
     },
   ];
@@ -261,6 +261,19 @@ function TableauPayement() {
                         100
                       ).toFixed(0)}
                       %
+                    </p>
+                  </div>
+                  <div className="pl-3 cursor-pointer">
+                    <p className="text-sm text-gray-500 text-center">
+                      Paid, but insufficient to reactivate
+                    </p>
+                    <p className="text-3xl font-bold text-blue-600 text-center">
+                      {
+                        data.filter(
+                          (x) =>
+                            x.observation === "No_action" && x.dejaPayer > 0
+                        ).length
+                      }{" "}
                     </p>
                   </div>
                 </>
