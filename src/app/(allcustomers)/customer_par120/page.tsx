@@ -251,7 +251,7 @@ function TableauPayement() {
                   </div>
                   <div className="pl-3">
                     <p className="text-sm text-gray-500 text-center">
-                      Pourcentage d&apos;actions
+                      Percentage of actions
                     </p>
                     <p className="text-3xl font-bold text-red-600 text-center">
                       {(
