@@ -87,7 +87,7 @@ function Refresh() {
         }
       );
       if (response.status === 200) {
-        window.location.replace("/par120");
+        window.location.replace("/customer_par120");
       } else {
         toast(response.data);
         setSending(false);

@@ -32,7 +32,6 @@ const colonneFilter = [
 
 function Customers() {
   const [data, setData] = useState<ITclient[]>([]);
-
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const submitLogin = async () => {
     try {

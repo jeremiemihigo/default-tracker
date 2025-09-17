@@ -47,7 +47,7 @@ export function LoginForm({
       });
       const data = await res.json();
       if (data.message === "success") {
-        router.push("/");
+        router.push("/dashboard");
       } else {
         setMessage(data.message);
       }
