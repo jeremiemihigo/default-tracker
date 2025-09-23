@@ -92,11 +92,7 @@ export function ChartAreaInteractive({ chartData }: Props) {
               tickMargin={8}
               minTickGap={32}
               tickFormatter={(value) => {
-                const date = new Date(value);
-                return date.toLocaleDateString("en-US", {
-                  month: "short",
-                  day: "numeric",
-                });
+                return value.toString();
               }}
             />
             <ChartTooltip
@@ -104,10 +100,7 @@ export function ChartAreaInteractive({ chartData }: Props) {
               content={
                 <ChartTooltipContent
                   labelFormatter={(value) => {
-                    return new Date(value).toLocaleDateString("en-US", {
-                      month: "short",
-                      day: "numeric",
-                    });
+                    return "PAR 120+";
                   }}
                   indicator="dot"
                 />
