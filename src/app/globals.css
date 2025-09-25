@@ -142,6 +142,8 @@
 .reactivation,
 .opt-out,
 .repossession,
+.write_off,
+.opt_out,
 .Done {
   background-color: rgb(14, 95, 45);
   border-radius: 5px;
