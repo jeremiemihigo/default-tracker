@@ -113,3 +113,15 @@ export interface IDataRefresh {
   tracker_par: string;
   feedback?: IFeedback[];
 }
+export interface IRapportDecision {
+  decision: string;
+  createdBy: string;
+  codeclient: string;
+  customer_name: string;
+  region: string;
+  shop: string;
+  par: string;
+  statut: string;
+  departement: string;
+  verifiedby: string;
+}
