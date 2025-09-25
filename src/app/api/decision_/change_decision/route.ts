@@ -15,16 +15,9 @@ export async function POST(request: NextRequest) {
     body: JSON.stringify({ data }),
   });
   const result = await res.json();
-  if (res.status === 200) {
-    const response = NextResponse.json({
-      status: res.status,
-    });
-    return response;
-  } else {
-    const response = NextResponse.json({
-      data: result.data,
-      status: res.status,
-    });
-    return response;
-  }
+  const response = NextResponse.json({
+    data: result,
+    status: res.status,
+  });
+  return response;
 }

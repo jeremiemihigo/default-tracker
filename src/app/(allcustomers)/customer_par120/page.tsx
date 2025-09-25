@@ -158,6 +158,27 @@ function TableauPayement() {
       enableHiding: false,
     },
     {
+      id: "decision",
+      header: ({ column }) => {
+        return (
+          <Button
+            variant="ghost"
+            onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+          >
+            Decisions
+            <ArrowUpDown />
+          </Button>
+        );
+      },
+      cell: ({ row }) => (
+        <div className={row.original.decision.toLocaleLowerCase()}>
+          {row.original.decision}
+        </div>
+      ),
+      enableSorting: false,
+      enableHiding: false,
+    },
+    {
       id: "performance",
       header: ({ column }) => {
         return (

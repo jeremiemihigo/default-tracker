@@ -47,19 +47,15 @@ function ChangeDecision({ data }: Props) {
       body: JSON.stringify(donner),
     });
     const payload = await response.json().catch(() => null);
-    console.log(payload);
     if (payload.status === 200) {
       toast("Opération effectuée");
       setIsSending(false);
     } else {
       setIsSending(false);
-      toast(payload.data, {
-        description: "Y a eu un souci avec lors de la validation",
-        action: {
-          label: "Undo",
-          onClick: () => console.log("Undo"),
-        },
-      });
+      toast(
+        "A decision has already been made for this client; you can go to the decisions module to modify it if necessary.",
+        { duration: 10000 }
+      );
     }
   };
 

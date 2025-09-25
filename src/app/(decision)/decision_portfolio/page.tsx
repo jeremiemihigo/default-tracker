@@ -157,7 +157,7 @@ function Decision_portfolio() {
         },
       });
       const response = await res.json();
-      console.log(response);
+
       if (response.status === 200) {
         setAllDecisions(response.data);
         setIsLoading(false);

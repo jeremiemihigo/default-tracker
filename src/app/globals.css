@@ -130,6 +130,7 @@
 .pending,
 .In_Process,
 .no_action,
+.tracking_ongoing,
 .verification {
   background-color: rgb(196, 198, 91);
   border-radius: 5px;

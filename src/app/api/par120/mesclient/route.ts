@@ -24,6 +24,10 @@ export async function GET(request: NextRequest) {
             ? index.feedback[0]?.title
             : index.feedback_staff,
         daily_rate: index.daily_rate.toFixed(2),
+        decision:
+          index.decisions.length > 0
+            ? index.decisions[0].decision
+            : "No_decision",
         date_refresh: moment(index.date_refresh).format("DD-MM-YYYY"),
       };
     });

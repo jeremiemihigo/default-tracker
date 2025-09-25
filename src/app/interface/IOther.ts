@@ -1,5 +1,6 @@
 import { IFeedback } from "./IFeedbacks";
 import { IShop } from "./settings/IAgent";
+import { IDecision } from "./TClient";
 
 export interface ICombo {
   value: string;
@@ -111,6 +112,8 @@ export interface IDataRefresh {
   performance: string;
   date_refresh: string;
   tracker_par: string;
+  decision: string;
+  decisions: IDecision[];
   feedback?: IFeedback[];
 }
 export interface IRapportDecision {
