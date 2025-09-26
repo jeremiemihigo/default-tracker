@@ -53,6 +53,7 @@ export interface ISidebar {
   decision_field: number;
   decision_fraude: number;
   decision_portfolio: number;
+  final_decisions: number;
 }
 export interface IPar120 {
   customer_id: string;

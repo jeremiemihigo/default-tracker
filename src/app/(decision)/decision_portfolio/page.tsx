@@ -1,8 +1,6 @@
 "use client";
 import HeaderComponent from "@/app/header/Header";
-import { IRapportDecision } from "@/app/interface/IOther";
 import { IDecision } from "@/app/interface/TClient";
-import Excel from "@/app/Tools/Excel";
 import Loading from "@/app/Tools/loading";
 import Popup from "@/app/Tools/Popup";
 import Tableau_set_Header from "@/app/Tools/Tab_set_Header";
@@ -25,7 +23,6 @@ const datafilter = [
 
 function Decision_portfolio() {
   const [data, setData] = useState<IDecision[]>([]);
-  const [alldecisions, setAllDecisions] = useState<IRapportDecision[]>([]);
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const submitLogin = async () => {
@@ -147,29 +144,6 @@ function Decision_portfolio() {
       enableHiding: false,
     },
   ];
-  const downloadDecisions = async () => {
-    setIsLoading(true);
-    try {
-      const res = await fetch(`/api/decision`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const response = await res.json();
-
-      if (response.status === 200) {
-        setAllDecisions(response.data);
-        setIsLoading(false);
-      }
-    } catch (error: unknown) {
-      if (error instanceof Error) {
-        console.log(error.message);
-      } else {
-        console.log("An unknown error occurred", error);
-      }
-    }
-  };
 
   return (
     <HeaderComponent title="Decision portfolio">
@@ -182,20 +156,6 @@ function Decision_portfolio() {
             columns={[...columns, ...columns1, ...columncomment]}
             customer_id="customer_id"
             datafilter={datafilter}
-            childrentop={
-              <>
-                <Button onClick={() => downloadDecisions()}>
-                  Download Decisions
-                </Button>
-                {alldecisions.length > 0 && (
-                  <Excel
-                    data={alldecisions}
-                    filename="decisions"
-                    title="Export to excel"
-                  />
-                )}
-              </>
-            }
           />
         </>
       )}

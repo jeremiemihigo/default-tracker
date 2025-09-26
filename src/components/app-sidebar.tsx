@@ -111,6 +111,11 @@ const data = {
           url: "/decision_portfolio",
           valeur: "decision_portfolio",
         },
+        {
+          title: "Final decisions",
+          url: "/final_decisions",
+          valeur: "final_decisions",
+        },
       ],
     },
     {
