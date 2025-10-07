@@ -119,15 +119,15 @@ function AddCustomer() {
 
         {/* Zone drag & drop */}
         <label
-          htmlFor="filecustomer"
+          htmlFor="filecustomernew"
           className="flex flex-col items-center justify-center border-2 border-dashed border-gray-300 rounded-xl cursor-pointer p-8 hover:bg-gray-100 transition"
         >
           <p className="text-gray-600 mb-2">cliquez pour choisir le fichier</p>
           <Input
             accept=".xlsx"
             onChange={(e) => readUploadFile(e)}
-            id="filecustomer"
-            name="filecustomer"
+            id="filecustomernew"
+            name="filecustomernew"
             type="file"
             className="hidden"
           />
