@@ -117,7 +117,7 @@ function LastDecision() {
                 />
                 <Combobox data={months} value={month} setValue={setMonth} />
                 <Button onClick={() => downloadDecisions()} className="w-full">
-                  Valider
+                  Search
                 </Button>
               </div>
             }

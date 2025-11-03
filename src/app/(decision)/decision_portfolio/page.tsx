@@ -163,7 +163,7 @@ function Decision_portfolio() {
               <div className="flex gap-3">
                 <Combobox data={months} value={month} setValue={setMonth} />
                 <Button onClick={() => submitLogin()} className="w-full">
-                  Valider
+                  Search
                 </Button>
               </div>
             }
