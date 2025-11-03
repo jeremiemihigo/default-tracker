@@ -1,6 +1,8 @@
 "use client";
 import HeaderComponent from "@/app/header/Header";
 import { IRapportDecision } from "@/app/interface/IOther";
+import { months } from "@/app/static/lien";
+import { Combobox } from "@/app/Tools/combobox";
 import Excel from "@/app/Tools/Excel";
 import Loading from "@/app/Tools/loading";
 import Tableau_set_Header from "@/app/Tools/Tab_set_Header";
@@ -27,10 +29,11 @@ function LastDecision() {
     []
   );
   const [isLoading, setIsLoading] = React.useState<boolean>(true);
+  const [month, setMonth] = React.useState<string>("current");
   const downloadDecisions = async () => {
     setIsLoading(true);
     try {
-      const res = await fetch(`/api/decision`, {
+      const res = await fetch(`/api/decision/decision/${month}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -98,23 +101,29 @@ function LastDecision() {
   });
   return (
     <HeaderComponent title="Final decisions">
-      {alldecisions.length > 0 && (
-        <>
+      <>
+        {!isLoading && (
           <Tableau_set_Header
             data={alldecisions}
             columns={columns1}
             customer_id="codeclient"
             datafilter={datafilter}
             childrentop={
-              <Excel
-                data={alldecisions}
-                filename="decisions"
-                title="Export to excel"
-              />
+              <div className="flex gap-3">
+                <Excel
+                  data={alldecisions}
+                  filename="decisions"
+                  title="Export to excel"
+                />
+                <Combobox data={months} value={month} setValue={setMonth} />
+                <Button onClick={() => downloadDecisions()} className="w-full">
+                  Valider
+                </Button>
+              </div>
             }
           />
-        </>
-      )}
+        )}
+      </>
 
       {isLoading && <Loading type="Loading" />}
     </HeaderComponent>

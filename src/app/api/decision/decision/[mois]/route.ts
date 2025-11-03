@@ -1,9 +1,13 @@
 import { lien_dt } from "@/app/static/lien";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(request: NextRequest) {
+export async function POST(
+  request: NextRequest,
+  context: { params: Promise<{ mois: string }> }
+) {
   const token = request.cookies.get("access")?.value;
-  const link = `${lien_dt}/rapportDecisions`;
+  const { mois } = await context.params;
+  const link = `${lien_dt}/rapportDecisions/${mois}`;
   const res = await fetch(link, {
     method: "POST",
     headers: {

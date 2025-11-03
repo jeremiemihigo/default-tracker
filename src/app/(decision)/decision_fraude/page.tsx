@@ -1,6 +1,8 @@
 "use client";
 import HeaderComponent from "@/app/header/Header";
 import { IDecision } from "@/app/interface/TClient";
+import { months } from "@/app/static/lien";
+import { Combobox } from "@/app/Tools/combobox";
 import Loading from "@/app/Tools/loading";
 import Popup from "@/app/Tools/Popup";
 import Tableau_set_Header from "@/app/Tools/Tab_set_Header";
@@ -24,12 +26,13 @@ const datafilter = [
 
 function Decision_fraude() {
   const [data, setData] = useState<IDecision[]>([]);
+  const [month, setMonth] = useState<string>("current");
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const submitLogin = async () => {
     setIsLoading(true);
     try {
-      const res = await fetch(`/api/decision/D7UNY`, {
+      const res = await fetch(`/api/decision/D7UNY/${month}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -156,6 +159,14 @@ function Decision_fraude() {
             columns={[...columns, ...columns1, ...columncomment]}
             customer_id="customer_id"
             datafilter={datafilter}
+            childrentop={
+              <div className="flex gap-3">
+                <Combobox data={months} value={month} setValue={setMonth} />
+                <Button onClick={() => submitLogin()} className="w-full">
+                  Valider
+                </Button>
+              </div>
+            }
           />
         </>
       )}

@@ -3,12 +3,12 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
   req: NextRequest,
-  context: { params: Promise<{ id: string }> }
+  context: { params: Promise<{ id: string; month: string }> }
 ) {
   const token = req.cookies.get("access")?.value;
-  const { id } = await context.params;
+  const { id, month } = await context.params;
 
-  const res = await fetch(`${lien_dt}/readDecisionArbitrage/${id}`, {
+  const res = await fetch(`${lien_dt}/readDecisionArbitrage/${id}/${month}`, {
     method: "GET",
     headers: {
       "Content-Type": "application/json",
