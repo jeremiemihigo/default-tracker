@@ -152,7 +152,7 @@ export function NavUser() {
             <DropdownMenuGroup>
               {donner.map((item, key) => {
                 return (
-                  <Link href={item.link} key={key}>
+                  <Link href="#" key={key}>
                     <DropdownMenuItem>
                       {item.icon}
                       {item.title}
