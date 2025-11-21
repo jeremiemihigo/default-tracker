@@ -65,6 +65,7 @@ function HeaderComponent({ children, title }: Props) {
                   href="https://bboxxvm.com"
                   target="_blank"
                   rel="noopener noreferrer"
+                  style={{ marginLeft: "10px" }}
                 >
                   <Alert variant="default">
                     <AlertCircleIcon />
