@@ -61,6 +61,16 @@ function HeaderComponent({ children, title }: Props) {
                     </Alert>
                   </div>
                 )}
+                <a
+                  href="https://bboxxvm.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Alert variant="default">
+                    <AlertCircleIcon />
+                    <AlertTitle>Go to call center support</AlertTitle>
+                  </Alert>
+                </a>
               </nav>
 
               <div style={{ padding: "10px" }}>{children}</div>

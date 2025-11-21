@@ -2,7 +2,7 @@ import { account_manager } from "@/app/static/lien";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(request: NextRequest) {
-  const token = request.cookies.get("access")?.value;
+  const token = request.cookies.get("token_global")?.value;
   const link = `${account_manager}/readAllCustomer`;
   const res = await fetch(link, {
     method: "GET",

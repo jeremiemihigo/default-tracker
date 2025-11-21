@@ -366,7 +366,6 @@ function PagePar120Dash() {
               ))}
             </tbody>
           </table>
-          ;
         </>
       )}
     </HeaderComponent>
