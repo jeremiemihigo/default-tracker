@@ -69,7 +69,7 @@ function HeaderComponent({ children, title }: Props) {
                 >
                   <Alert variant="default">
                     <AlertCircleIcon />
-                    <AlertTitle>Go to call center support</AlertTitle>
+                    <AlertTitle>Open call center support</AlertTitle>
                   </Alert>
                 </a>
               </nav>
