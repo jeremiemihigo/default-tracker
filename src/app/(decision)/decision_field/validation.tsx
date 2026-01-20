@@ -1,4 +1,5 @@
 import { IDecision } from "@/app/interface/TClient";
+import { dataDecision } from "@/app/static/lien";
 import { Combobox } from "@/app/Tools/combobox";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -19,6 +20,7 @@ const label_portofolio = [
   { value: "REJECTED", label: "REJECTED" },
 ];
 function Validation({ client, type }: Props) {
+  const [decision, setDecisionSelect] = React.useState<string>(client.decision);
   const [isSending, setIsLoading] = React.useState<boolean>(false);
   const [value, setValue] = React.useState<string>("");
   const [commentaire, setCommentaire] = React.useState<string>("");
@@ -28,6 +30,7 @@ function Validation({ client, type }: Props) {
     const donner = {
       id: client._id,
       statut: value,
+      decision,
       commentaire,
     };
     try {
@@ -58,6 +61,13 @@ function Validation({ client, type }: Props) {
 
   return (
     <div>
+      <div className="grid gap-3 mb-4">
+        <Combobox
+          value={decision}
+          data={dataDecision}
+          setValue={setDecisionSelect}
+        />
+      </div>
       <Combobox
         value={value}
         data={type === "field_fraude" ? labels : label_portofolio}

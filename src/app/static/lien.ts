@@ -1,5 +1,5 @@
-const link = "https://visitemenagesbackend.bboxxvm.com";
-const link_big = "https://visitemenagesbackend.bboxxvm.com";
+const link = "https://callcentersupport.bboxxvm.com";
+const link_big = "https://callcentersupport.bboxxvm.com";
 //const link_big = "http://localhost:5000";
 //const link = "http://localhost:5000";
 
@@ -65,4 +65,9 @@ export const months = [
   { label: "October", value: "10" },
   { label: "November", value: "11" },
   { label: "December", value: "12" },
+];
+export const dataDecision = [
+  { label: "WRITE_OFF", value: "WRITE_OFF" },
+  { label: "OPT_OUT", value: "OPT_OUT" },
+  { label: "TRACKING_ONGOING", value: "TRACKING_ONGOING" },
 ];

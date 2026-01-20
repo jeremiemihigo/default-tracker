@@ -1,5 +1,6 @@
 "use client";
 
+import { dataDecision } from "@/app/static/lien";
 import { Combobox } from "@/app/Tools/combobox";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,11 +17,6 @@ type Props = {
     customer_name: string;
   };
 };
-const dataDecision = [
-  { label: "WRITE_OFF", value: "WRITE_OFF" },
-  { label: "OPT_OUT", value: "OPT_OUT" },
-  { label: "TRACKING_ONGOING", value: "TRACKING_ONGOING" },
-];
 
 function ChangeDecision({ data }: Props) {
   const [decision, setDecisionSelect] = useState<string>("");
