@@ -49,20 +49,20 @@ export async function POST(request: NextRequest) {
         Feedback_last_vm: capitalize(
           x.vm_fonction
             ? returnFeedback(x.vm_fonction.demande.raison, allfeedbacks)
-            : "No_visits"
+            : "No_visits",
         ),
         date_last_vm: x.vm_fonction
           ? x.vm_fonction.demande.updatedAt
           : "No_visits",
         agent_last_vm: capitalize(
-          x.vm_fonction ? x.vm_fonction.demandeur.nom : "No_visits"
+          x.vm_fonction ? x.vm_fonction.demandeur.nom : "No_visits",
         ),
         //visite categorisation
         last_vm_categorie_date: x.visite_categori
           ? x.visite_categori.demande.updatedAt
           : "No_visits",
         last_vm_categorie_agent: capitalize(
-          x.visite_categori ? x.visite_categori.demandeur.nom : "No_visits"
+          x.visite_categori ? x.visite_categori.demandeur.nom : "No_visits",
         ),
         last_vm_for_categorie_id: x.visite_categori
           ? x.visite_categori.demandeur.codeAgent
@@ -70,7 +70,7 @@ export async function POST(request: NextRequest) {
         feedback_call: capitalize(
           x.last_call
             ? returnFeedback(x.last_call.sioui_texte, allfeedbacks)
-            : "No_calls"
+            : "No_calls",
         ),
         currentFeedback: x.currentFeedback,
         In_charge: returnIncharge(x)?.join(";"),

@@ -5,7 +5,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(
   request: NextRequest,
-  context: { params: Promise<{ departement: string; poste: string }> }
+  context: { params: Promise<{ departement: string; poste: string }> },
 ) {
   const token = request.cookies.get("access")?.value;
   const params = await context.params;
@@ -13,7 +13,7 @@ export async function GET(
   const res = await fetch(link, {
     method: "GET",
     headers: {
-      "Content-Type": "Application/json",
+      "Content-Type": "application/json",
       Authorization: "Bearer " + token,
     },
   });

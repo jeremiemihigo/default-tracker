@@ -9,7 +9,7 @@ export async function POST(request: NextRequest) {
   const res = await fetch(link, {
     method: "POST",
     headers: {
-      "Content-Type": "Application/json",
+      "Content-Type": "application/json",
       Authorization: "Bearer " + token,
     },
     body: JSON.stringify({ data }),
@@ -35,7 +35,7 @@ export async function GET(request: NextRequest) {
   const res = await fetch(link, {
     method: "GET",
     headers: {
-      "Content-Type": "Application/json",
+      "Content-Type": "application/json",
       Authorization: "Bearer " + token,
     },
   });

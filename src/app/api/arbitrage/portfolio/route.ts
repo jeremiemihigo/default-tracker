@@ -39,23 +39,23 @@ export async function GET(request: NextRequest) {
         appel: capitalize(
           x.last_call?.sioui_texte
             ? returnFeedback(x.last_call?.sioui_texte, allfeedback)
-            : ""
+            : "",
         ),
         currentFeedbacks: capitalize(
-          returnFeedback(x.currentFeedback, allfeedback)
+          returnFeedback(x.currentFeedback, allfeedback),
         ),
         last_vm_agent: capitalize(
           x?.visites.length > 0
             ? returnvisite(x.visites, ["agent", "tech"])
-            : "No_visits"
+            : "No_visits",
         ),
         last_vm_rs: capitalize(
           x?.visites.length > 0
             ? returnvisite(x.visites, ["RS", "TL"])
-            : "No_visits"
+            : "No_visits",
         ),
         last_vm_po: capitalize(
-          x?.visites.length > 0 ? returnvisite(x.visites, ["PO"]) : "No_visits"
+          x?.visites.length > 0 ? returnvisite(x.visites, ["PO"]) : "No_visits",
         ),
       };
     });
@@ -65,6 +65,6 @@ export async function GET(request: NextRequest) {
 
   return NextResponse.json(
     { error: "Failed to fetch", status: res.status },
-    { status: res.status }
+    { status: res.status },
   );
 }

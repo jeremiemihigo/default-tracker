@@ -2,7 +2,6 @@ import { lien } from "@/app/static/lien";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: Request) {
-  console.log("je suis dans post");
   const identiant = await request.json();
   const link = `${lien}/loginUserAdmin`;
   const res = await fetch(link, {
@@ -55,7 +54,7 @@ export async function GET(request: NextRequest) {
     const res = await fetch(link, {
       method: "GET",
       headers: {
-        "Content-Type": "Application/json",
+        "Content-Type": "application/json",
         Authorization: "Bearer " + token,
       },
     });

@@ -10,7 +10,7 @@ export async function GET(request: NextRequest) {
   const res = await fetch(link, {
     method: "GET",
     headers: {
-      "Content-Type": "Application/json",
+      "Content-Type": "application/json",
       Authorization: "Bearer " + token,
     },
   });

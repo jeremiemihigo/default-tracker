@@ -13,7 +13,7 @@ export async function POST(request: NextRequest) {
   const res = await fetch(link, {
     method: "POST",
     headers: {
-      "Content-Type": "Application/json",
+      "Content-Type": "application/json",
       Authorization: "Bearer " + token,
     },
     body: JSON.stringify(data),
@@ -76,21 +76,22 @@ export async function POST(request: NextRequest) {
         expected_cash: x.cashattendu ? "$" + x.cashattendu : "$0",
         cash_Pay: x.cashPayer ? "$" + x.cashPayer : "$0",
         Feedback_call: capitalize(
-          returnFeedback(x.derniereappel?.sioui_texte, "No_calls") || "No_calls"
+          returnFeedback(x.derniereappel?.sioui_texte, "No_calls") ||
+            "No_calls",
         ),
         Feedback_PA_or_Tech: capitalize(
           x.visites?.length > 0
             ? returnvisite(x.visites, ["agent", "tech"])
-            : "No_visits"
+            : "No_visits",
         ),
 
         zbm_rs_sm_tl: capitalize(
           x?.visites.length > 0
             ? returnvisite(x.visites, ["RS", "TL", "SM", "ZBM"])
-            : "No_visits"
+            : "No_visits",
         ),
         Feedback_PO: capitalize(
-          x?.visites.length > 0 ? returnvisite(x.visites, ["PO"]) : "No_visits"
+          x?.visites.length > 0 ? returnvisite(x.visites, ["PO"]) : "No_visits",
         ),
         fullDate: x.fullDate,
         Decision: capitalize(x.statut_decision),

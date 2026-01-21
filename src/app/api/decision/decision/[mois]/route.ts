@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(
   request: NextRequest,
-  context: { params: Promise<{ mois: string }> }
+  context: { params: Promise<{ mois: string }> },
 ) {
   const token = request.cookies.get("access")?.value;
   const { mois } = await context.params;
@@ -11,7 +11,7 @@ export async function POST(
   const res = await fetch(link, {
     method: "POST",
     headers: {
-      "Content-Type": "Application/json",
+      "Content-Type": "application/json",
       Authorization: "Bearer " + token,
     },
   });
