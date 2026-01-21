@@ -59,7 +59,7 @@ function UploadingPayment({ load, setLoad, data }: Props) {
                 amount: x.amount,
                 provider_transact_reference: x.provider_transact_reference,
                 transaction_time: excelSerialToJSDate(
-                  parseInt(x.transaction_time)
+                  parseInt(x.transaction_time),
                 ).toString(),
               };
             });
@@ -107,7 +107,7 @@ function UploadingPayment({ load, setLoad, data }: Props) {
           },
           maxBodyLength: Infinity, // important pour axios
           maxContentLength: Infinity,
-        }
+        },
       );
 
       if (res.status === 200) {

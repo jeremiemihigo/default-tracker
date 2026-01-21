@@ -47,11 +47,13 @@ export async function GET(request: NextRequest) {
 }
 export async function DELETE(request: NextRequest) {
   const token = request.cookies.get("access")?.value;
+  console.log(token);
   const link = `${lien_dt}/deletePayement`;
   const res = await fetch(link, {
     method: "DELETE",
+
     headers: {
-      "Content-Type": "Application/json",
+      "Content-Type": "application/json",
       Authorization: "Bearer " + token,
     },
   });
