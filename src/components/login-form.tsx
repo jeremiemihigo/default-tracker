@@ -45,6 +45,7 @@ export function LoginForm({
         },
         body: JSON.stringify(values),
       });
+      console.log(res);
       const data = await res.json();
       if (data.message === "success") {
         router.push("/");

@@ -1,5 +1,5 @@
-const link = "https://callcentersupport.bboxxvm.com";
-const link_big = "https://callcentersupport.bboxxvm.com";
+const link = "https://www.callcentersupport.bboxxvm.com";
+const link_big = "https://www.callcentersupport.bboxxvm.com";
 //const link_big = "http://localhost:5000";
 //const link = "http://localhost:5000";
 

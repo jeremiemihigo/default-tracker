@@ -2,6 +2,7 @@ import { lien } from "@/app/static/lien";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(request: Request) {
+  console.log("je suis dans post");
   const identiant = await request.json();
   const link = `${lien}/loginUserAdmin`;
   const res = await fetch(link, {
